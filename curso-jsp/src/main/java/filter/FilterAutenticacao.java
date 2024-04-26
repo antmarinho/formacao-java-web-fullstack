@@ -76,6 +76,10 @@ public class FilterAutenticacao extends HttpFilter implements Filter {
 			
 			e.printStackTrace();
 			
+			RequestDispatcher redir = request.getRequestDispatcher("/erro.jsp");
+			request.setAttribute("msg", e.getMessage());
+			redir.forward(request, response);
+			
 			try {
 				
 				connection.rollback();

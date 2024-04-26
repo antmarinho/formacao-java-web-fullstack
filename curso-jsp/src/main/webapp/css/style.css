@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+form {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 40%;
+	left: 40%;
+	right: 33%;
+	width: 45%;
+}
+		
+h3 {
+	position: absolute;
+	top: 30%;
+	left: 40%;
+}
+		
+h5 {
+	position: absolute;
+	top: 70%;
+	left: 40%;
+	color: rgb(170, 0, 0);
+	font-size: 1rem;
+}
+		
+input {
+	width: 25%;
+}
