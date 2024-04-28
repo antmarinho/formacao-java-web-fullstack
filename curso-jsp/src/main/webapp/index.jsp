@@ -7,20 +7,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet" type="text/css">
+    <script src="js/scripts.js" type="text/javascript" defer="defer"></script>
 	<title>Curso JSP</title>
 
 </head>
 <body>
 	<h3>Bem vindo ao curso de JSP</h3>		
-	<form action="ServletLogin" method="post" class="row g-3">
+	<form action="ServletLogin" method="post" class="row g-3 needs-validation" novalidate>
 		<input type="hidden" value="<%= request.getParameter("url")%>" name="url">
 		<div class="col-md-6">
-			<label class="form-label">Login:</label>
-			<input class="form-control" name="login" type="text">
+			<label class="form-label">Usuario:</label>
+			<input class="form-control" name="login" type="text" required="required">
 		</div>
 		<div class="col-md-6">
 			<label class="form-label">Senha:</label>
-			<input class="form-control" name="senha" type="password">
+			<input class="form-control" name="senha" type="password" required="required">
 		</div>
 		<div >
 			<input class="btn btn-primary" type="submit" value="Acessar">
