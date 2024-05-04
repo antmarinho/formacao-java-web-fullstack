@@ -9,7 +9,7 @@
                                           <p class="m-b-0">Welcome to Mega Able</p>
                                       </div>
                                   </div>
-                                  <div class="col-md-4">
+                                 <!--  <div class="col-md-4">
                                       <ul class="breadcrumb-title">
                                           <li class="breadcrumb-item">
                                               <a href="index.html"> <i class="fa fa-home"></i> </a>
@@ -17,7 +17,7 @@
                                           <li class="breadcrumb-item"><a href="#!">Dashboard</a>
                                           </li>
                                       </ul>
-                                  </div>
+                                  </div>-->
                               </div>
                           </div>
                       </div>
