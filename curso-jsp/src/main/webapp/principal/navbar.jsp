@@ -17,7 +17,7 @@
 					</div>
 				</div>
 			</div> -->
-			<a href="">
+			<a href="<%= request.getContextPath() %>/principal/principal.jsp">
 				<img class="img-fluid" src="<%= request.getContextPath() %>/assets/images/logo.png" alt="Theme-Logo" />
 			</a>
  			<a class="mobile-options waves-effect waves-light">
@@ -115,7 +115,7 @@
                         	</a>
                         </li>
                         <li class="waves-effect waves-light">
-                        	<a href="ServletLogin?acao=logout">
+                        	<a href="<%= request.getContextPath() %>/ServletLogin?acao=logout">
                             	<i class="ti-layout-sidebar-left"></i> Logout
                             </a>
                         </li>

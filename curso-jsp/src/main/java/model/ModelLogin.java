@@ -6,12 +6,24 @@ public class ModelLogin implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	private Long id;
+	private String nome;
+	private String email;
 	private String user;
 	private String pass;
 	
 	public ModelLogin() {}
 	
 	public ModelLogin(String user, String pass) {
+		this.user = user;
+		this.pass = pass;
+	}
+	
+	public ModelLogin(Long id, String nome, String email, String user, String pass) {
+
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
 		this.user = user;
 		this.pass = pass;
 	}
@@ -24,6 +36,30 @@ public class ModelLogin implements Serializable{
 		this.user = user;
 	}
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getPass() {
 		return pass;
 	}

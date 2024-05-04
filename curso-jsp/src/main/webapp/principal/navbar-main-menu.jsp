@@ -15,12 +15,12 @@
                                       <li class="more-details">
                                           <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
                                           <a href="#!"><i class="ti-settings"></i>Settings</a>
-                                          <a href="ServletLogin?acao=logout"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                                          <a href="<%= request.getContextPath() %>/ServletLogin?acao=logout"><i class="ti-layout-sidebar-left"></i>Logout</a>
                                       </li>
                                   </ul>
                               </div>
                           </div>
-                          <div class="p-15 p-b-0">
+                          <!-- <div class="p-15 p-b-0">
                               <form class="form-material">
                                   <div class="form-group form-primary">
                                       <input type="text" name="footer-email" class="form-control" required="">
@@ -28,11 +28,11 @@
                                       <label class="float-label"><i class="fa fa-search m-r-10"></i>Search Friend</label>
                                   </div>
                               </form>
-                          </div>
+                          </div>-->
                           <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Layout</div>
                           <ul class="pcoded-item pcoded-left-item">
                               <li class="active">
-                                  <a href="" class="waves-effect waves-dark">
+                                  <a href="<%= request.getContextPath() %>/principal/principal.jsp" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.dash.main">Home</span>
                                       <span class="pcoded-mcaret"></span>
@@ -46,7 +46,7 @@
                                   </a>
                                   <ul class="pcoded-submenu">
                                       <li class=" ">
-                                          <a href="principal/usuario.jsp" class="waves-effect waves-dark">
+                                          <a href="<%= request.getContextPath() %>/principal/usuario.jsp" class="waves-effect waves-dark">
                                               <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                               <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Usuario</span>
                                               <span class="pcoded-mcaret"></span>
