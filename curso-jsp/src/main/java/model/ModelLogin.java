@@ -28,6 +28,16 @@ public class ModelLogin implements Serializable{
 		this.pass = pass;
 	}
 
+	public boolean isNovo() {
+		
+		if(this.id == null)
+			return true; // inserir
+		else if(this.id != null && this.id > 0)
+			return false; // atualizar
+		
+		return id == null;
+	}
+	
 	public String getUser() {
 		return user;
 	}
