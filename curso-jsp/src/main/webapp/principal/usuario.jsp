@@ -34,6 +34,9 @@
                                                         <h4 class="sub-title">Cadastro de usuario</h4>
                                                         
                                                          <form class="form-material" action="<%= request.getContextPath()%>/ServletUserController" method="post" id="form-user">
+                                                         
+                                                         	<input type="hidden" name="acao" id="acao" value="">
+                                                         	
                                                             <div class="form-group form-default form-static-label">
                                                                 <input type="text" name="id" id="id" class="form-control" readonly="readonly" value="${mLogin.id}">
                                                                 <span class="form-bar"></span>
@@ -62,8 +65,10 @@
                                                         
                                                           	<button type="button" class="btn btn-primary waves-effect waves-light" onclick="limparForm()">Novo</button>
             												<button class="btn btn-success waves-effect waves-light">Salvar</button>
-												            <button class="btn btn-info waves-effect waves-light">Editar</button>
-												            <button class="btn btn-danger waves-effect waves-light">Excluir</button>
+												            <!--  <button class="btn btn-info waves-effect waves-light">Editar</button>-->
+												            <button type="button" class="btn btn-danger waves-effect waves-light" onclick="deleteAjax()">Excluir</button>
+												            <!-- Button trigger modal -->
+															<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalUsuario">Pesquisar</button>
 												           
 												                                                          
                                                         </form>
@@ -71,7 +76,7 @@
              							</div>
              							</div>
              							</div>
-             							<span style="color: red">${msg}</span>
+             							<span id="msg" style="color: red">${msg}</span>
                                     </div>
                                     <!-- Page-body end -->
                                 </div>
@@ -84,7 +89,71 @@
         </div>
     </div>
     <jsp:include page="js-file.jsp"></jsp:include>
+    <!-- Modal -->
+	<div class="modal fade" id="exampleModalUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Pesquisa de usuario</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <div class="input-group mb-3">
+  				<input id="nomeBusca" type="text" class="form-control" placeholder="Nome" aria-label="nome" aria-describedby="basic-addon2">
+  				<div class="input-group-append">
+    				<button  class="btn btn-success" type="button" onclick="buscarUsuario()">Buscar</button>
+  				</div>
+			</div>
+				<table class="table">
+				  <thead>
+				    <tr>
+				      <th scope="col">ID</th>
+				      <th scope="col">Nome</th>
+				      <th scope="col">Ver</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    
+				  </tbody>
+				</table>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
     <script type="text/javascript">
+    
+    	function buscarUsuario() {
+    		
+    		var nome = document.getElementById("nomeBusca").value;
+    		
+    		if(nome != null && nome != "" && nome.trim() != "") {
+    			
+    			var urlAction = document.getElementById("form-user").action;
+    			
+    			$.ajax({
+    				
+    				method: "get",
+    				url: urlAction,
+    				data: "nome=" + nome + "&acao=buscarAjax",
+    				success: function(response) {
+
+    					
+					}
+    				
+    				
+    			}).fail(function(xhr,status,errorThrown){
+    				
+    				alert("Erro ao buscar usuario por nome: " + xhr.responseText);
+    			});
+    		}
+			
+		}
+    
     	function limparForm() {
     		
     		var elementos = document.getElementById("form-user").elements;
@@ -92,6 +161,47 @@
     		for(i = 0; i < elementos.length; i++) {
     			
     			elementos[i].value = "";
+    			
+    		}
+			
+		}
+    	
+    	function deleteAjax() {
+			
+    		if(confirm("Deseja realmente excluir os dados")) {
+    			
+    			var urlAction = document.getElementById("form-user").action;
+    			var id = document.getElementById("id").value;
+    			
+    			$.ajax({
+    				
+    				method: "get",
+    				url: urlAction,
+    				data: "id=" + id + "&acao=deletarAjax",
+    				success: function(response) {
+    					
+    					limparForm();
+    					
+    					document.getElementById("msg").textContent = response;
+    					
+    					alert(response);
+					}
+    				
+    				
+    			}).fail(function(xhr,status,errorThrown){
+    				
+    				alert("Erro ao deletar usuario por id: " + xhr.responseText);
+    			});
+    		}
+		}
+    	
+    	function criarDelete() {
+    		
+    		if(confirm("Deseja realmente excluir os dados?")) {
+    			
+    			document.getElementById("form-user").method = "get";
+        		document.getElementById("acao").value = "deletar";
+        		document.getElementById("form-user").submit();
     			
     		}
 			

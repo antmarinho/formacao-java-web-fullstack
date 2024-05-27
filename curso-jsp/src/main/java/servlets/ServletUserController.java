@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.ModelLogin;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import dao.DAOUserRepository;
 
@@ -23,6 +24,48 @@ public class ServletUserController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		try {
+			
+			String acao = request.getParameter("acao");
+		
+			if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("deletar")) {
+			
+				String idUser = request.getParameter("id");
+			
+				dao.deletar(idUser);
+				
+				request.setAttribute("msg", "Excluido com sucesso!");
+				
+				request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
+				
+			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("deletarAjax")) {
+					
+					String idUser = request.getParameter("id");
+				
+					dao.deletar(idUser);
+					
+					response.getWriter().write("Excluido com sucesso!");
+					
+			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("buscarAjax")) {
+				
+				String nome = request.getParameter("nome");
+			
+				
+				
+				//response.getWriter().write("Excluido com sucesso!");
+				
+			} 
+			else 
+				request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+			RequestDispatcher redir = request.getRequestDispatcher("/erro.jsp");
+			request.setAttribute("msg", e.getMessage());
+			redir.forward(request, response);
+		}
 		
 	}
 

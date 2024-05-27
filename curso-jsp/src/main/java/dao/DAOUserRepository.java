@@ -92,4 +92,17 @@ public class DAOUserRepository {
 
 	}
 	
+	public void deletar(String id) throws SQLException {
+		
+		String sql = "DELETE FROM \"user\" WHERE id = ?";
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		stmt.setLong(1, Long.parseLong(id));
+		
+		stmt.executeUpdate();
+		
+		connection.commit();
+	}
+	
 }
