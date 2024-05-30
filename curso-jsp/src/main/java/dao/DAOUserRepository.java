@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import connection.SingleConnection;
 import model.ModelLogin;
@@ -55,6 +57,60 @@ public class DAOUserRepository {
 		
 	}
 	
+	public List<ModelLogin> consultaUsuarioList(String nome) throws SQLException {
+		
+		List<ModelLogin> users = new ArrayList<>();
+		
+		String sql = "SELECT * FROM \"user\" WHERE UPPER(nome) LIKE UPPER(?)";
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		stmt.setString(1, "%" + nome + "%");
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			ModelLogin ml = new ModelLogin();
+			
+			ml.setEmail(rs.getString("email"));
+			ml.setId(rs.getLong("id"));
+			ml.setNome(rs.getString("nome"));
+			//ml.setPass(rs.getNString("pass"));
+			ml.setUser(rs.getString("login"));
+			
+			users.add(ml);
+		}
+		
+		return users ;
+	}
+	
+	public List<ModelLogin> consultaAll() throws SQLException {
+		
+		List<ModelLogin> users = new ArrayList<>();
+		
+		String sql = "SELECT * FROM \"user\"";
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			ModelLogin ml = new ModelLogin();
+			
+			ml.setEmail(rs.getString("email"));
+			ml.setId(rs.getLong("id"));
+			ml.setNome(rs.getString("nome"));
+			//ml.setPass(rs.getNString("pass"));
+			ml.setUser(rs.getString("login"));
+			
+			users.add(ml);
+		}
+		
+		return users ;
+	}
+	
 	public ModelLogin pesquisar(String user) throws SQLException {
 		
 		ModelLogin mLogin = new ModelLogin();
@@ -62,6 +118,31 @@ public class DAOUserRepository {
 		String sql = "SELECT * FROM \"user\" WHERE login = '" + user + "'";
 		
 		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			mLogin.setId(rs.getLong("id"));
+			mLogin.setEmail(rs.getString("email"));
+			mLogin.setNome(rs.getString("nome"));
+			mLogin.setPass(rs.getString("pass"));
+			mLogin.setUser(rs.getString("login"));
+			
+		}
+		
+		return mLogin;
+	}
+	
+	public ModelLogin pesquisarId(String id) throws SQLException {
+		
+		ModelLogin mLogin = new ModelLogin();
+		
+		String sql = "SELECT * FROM \"user\" WHERE id = ?";
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		stmt.setLong(1, Long.parseLong(id));
 		
 		ResultSet rs = stmt.executeQuery();
 		

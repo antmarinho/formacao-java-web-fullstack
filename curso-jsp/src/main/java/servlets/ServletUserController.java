@@ -2,6 +2,7 @@ package servlets;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,6 +10,9 @@ import model.ModelLogin;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dao.DAOUserRepository;
 
@@ -34,6 +38,9 @@ public class ServletUserController extends HttpServlet {
 			
 				dao.deletar(idUser);
 				
+				List<ModelLogin> users = dao.consultaAll();
+				request.setAttribute("mLogins",users);
+				
 				request.setAttribute("msg", "Excluido com sucesso!");
 				
 				request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
@@ -50,13 +57,44 @@ public class ServletUserController extends HttpServlet {
 				
 				String nome = request.getParameter("nome");
 			
+				List<ModelLogin> usersJson = dao.consultaUsuarioList(nome);
 				
+				ObjectMapper mapper = new ObjectMapper();
 				
-				//response.getWriter().write("Excluido com sucesso!");
+				String json = mapper.writeValueAsString(usersJson);
 				
-			} 
-			else 
+				response.getWriter().write(json);
+				
+			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("editar")) {
+				
+				String id = request.getParameter("id");
+				
+				ModelLogin ml = dao.pesquisarId(id);
+				
+				List<ModelLogin> users = dao.consultaAll();
+				request.setAttribute("mLogins",users);
+				
+				request.setAttribute("msg", "Usuario em edicao");
+				request.setAttribute("mLogin", ml);
+				
 				request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
+				
+			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("listarUser")) {
+				
+				List<ModelLogin> users = dao.consultaAll();
+				
+				request.setAttribute("msg", "Usuarios carregados");
+				request.setAttribute("mLogins",users);
+				
+				request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
+			}
+			
+			else {
+				
+					List<ModelLogin> users = dao.consultaAll();
+					request.setAttribute("mLogins",users);
+					request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
+			}
 			
 		} catch (SQLException e) {
 			
@@ -102,6 +140,8 @@ public class ServletUserController extends HttpServlet {
 					mLogin = dao.salvar(mLogin);
 				}
 				
+				List<ModelLogin> users = dao.consultaAll();
+				request.setAttribute("mLogins",users);
 				
 				request.setAttribute("msg", msg);
 				request.setAttribute("mLogin", mLogin);

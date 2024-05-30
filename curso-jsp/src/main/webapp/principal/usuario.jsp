@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
+
   <jsp:include page="head.jsp"></jsp:include>
   <body>
   <!-- Pre-loader start -->
@@ -77,6 +81,26 @@
              							</div>
              							</div>
              							<span id="msg" style="color: red">${msg}</span>
+										<div style="height: 300px; overflow: scroll;">
+											<table class="table" id="tabelaUsers">
+											  <thead>
+											    <tr>
+											      <th scope="col">ID</th>
+											      <th scope="col">Nome</th>
+											      <th scope="col">Editar</th>
+											    </tr>
+											  </thead>
+											  <tbody>
+											    <c:forEach items="${mLogins}" var="ml">
+											    	<tr>
+											    		<td><c:out value="${ml.id}"></c:out></td>
+											    		<td><c:out value="${ml.nome}"></c:out></td>
+											    		<td><a class="btn btn-info" href="<%= request.getContextPath() %>/ServletUserController?acao=editar&id=${ml.id}">Ver</a></td>
+											    	</tr>
+											    </c:forEach>
+											  </tbody>
+											</table>
+										</div>
                                     </div>
                                     <!-- Page-body end -->
                                 </div>
@@ -103,21 +127,24 @@
 	        <div class="input-group mb-3">
   				<input id="nomeBusca" type="text" class="form-control" placeholder="Nome" aria-label="nome" aria-describedby="basic-addon2">
   				<div class="input-group-append">
-    				<button  class="btn btn-success" type="button" onclick="buscarUsuario()">Buscar</button>
+    				<button class="btn btn-success" type="button" onclick="buscarUsuario()">Buscar</button>
   				</div>
 			</div>
-				<table class="table">
+			<div style="height: 300px; overflow: scroll;">
+				<table class="table" id="tabela">
 				  <thead>
 				    <tr>
 				      <th scope="col">ID</th>
 				      <th scope="col">Nome</th>
-				      <th scope="col">Ver</th>
+				      <th scope="col">Editar</th>
 				    </tr>
 				  </thead>
 				  <tbody>
 				    
 				  </tbody>
 				</table>
+			</div>
+			<span id="total"></span>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -126,6 +153,14 @@
 	  </div>
 	</div>
     <script type="text/javascript">
+    
+    	function editar(id) {
+    		
+    		var urlAction = document.getElementById("form-user").action;
+    		
+    		window.location.href = urlAction + "?acao=editar&id=" + id;
+			
+		}
     
     	function buscarUsuario() {
     		
@@ -142,7 +177,14 @@
     				data: "nome=" + nome + "&acao=buscarAjax",
     				success: function(response) {
 
+    					var json = JSON.parse(response);
     					
+    					$('#tabela > tbody > tr').remove();
+    					
+    					for(let i = 0; i < json.length; i++) 
+    						$('#tabela > tbody').append('<tr> <td>' + json[i].id + '</td> <td>' + json[i].nome + '</td> <td> <button onclick="editar(' + json[i].id + ')" class="btn btn-info">Ver</button> </td> </tr>');
+						
+    					document.getElementById("total").textContent = "Resultados: " + json.length;
 					}
     				
     				
