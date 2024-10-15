@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.DAOUserRepository;
 
 
-public class ServletUserController extends HttpServlet {
+public class ServletUserController extends ServletGenericUtil {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -38,7 +38,7 @@ public class ServletUserController extends HttpServlet {
 			
 				dao.deletar(idUser);
 				
-				List<ModelLogin> users = dao.consultaAll();
+				List<ModelLogin> users = dao.consultaAll(super.getUserLogado(request));
 				request.setAttribute("mLogins",users);
 				
 				request.setAttribute("msg", "Excluido com sucesso!");
@@ -57,7 +57,7 @@ public class ServletUserController extends HttpServlet {
 				
 				String nome = request.getParameter("nome");
 			
-				List<ModelLogin> usersJson = dao.consultaUsuarioList(nome);
+				List<ModelLogin> usersJson = dao.consultaUsuarioList(nome,super.getUserLogado(request));
 				
 				ObjectMapper mapper = new ObjectMapper();
 				
@@ -69,9 +69,9 @@ public class ServletUserController extends HttpServlet {
 				
 				String id = request.getParameter("id");
 				
-				ModelLogin ml = dao.pesquisarId(id);
+				ModelLogin ml = dao.pesquisarId(id,super.getUserLogado(request));
 				
-				List<ModelLogin> users = dao.consultaAll();
+				List<ModelLogin> users = dao.consultaAll(super.getUserLogado(request));
 				request.setAttribute("mLogins",users);
 				
 				request.setAttribute("msg", "Usuario em edicao");
@@ -81,7 +81,7 @@ public class ServletUserController extends HttpServlet {
 				
 			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("listarUser")) {
 				
-				List<ModelLogin> users = dao.consultaAll();
+				List<ModelLogin> users = dao.consultaAll(super.getUserLogado(request));
 				
 				request.setAttribute("msg", "Usuarios carregados");
 				request.setAttribute("mLogins",users);
@@ -91,7 +91,7 @@ public class ServletUserController extends HttpServlet {
 			
 			else {
 				
-					List<ModelLogin> users = dao.consultaAll();
+					List<ModelLogin> users = dao.consultaAll(super.getUserLogado(request));
 					request.setAttribute("mLogins",users);
 					request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
 			}
@@ -137,10 +137,10 @@ public class ServletUserController extends HttpServlet {
 					else
 						msg = "atualizado com sucesso";
 					
-					mLogin = dao.salvar(mLogin);
+					mLogin = dao.salvar(mLogin,super.getUserLogado(request));
 				}
 				
-				List<ModelLogin> users = dao.consultaAll();
+				List<ModelLogin> users = dao.consultaAll(super.getUserLogado(request));
 				request.setAttribute("mLogins",users);
 				
 				request.setAttribute("msg", msg);

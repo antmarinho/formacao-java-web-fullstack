@@ -19,11 +19,11 @@ public class DAOUserRepository {
 		connection = SingleConnection.getConnection();
 	}
 	
-	public ModelLogin salvar(ModelLogin mLogin) throws SQLException {
+	public ModelLogin salvar(ModelLogin mLogin, Long user) throws SQLException {
 		
 		if(mLogin.isNovo()) {
 		
-			String sql = "INSERT INTO \"user\"(login,pass,nome,email) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO \"user\"(login,pass,nome,email,id_user) VALUES (?, ?, ?, ?, ?)";
 			
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
@@ -31,7 +31,8 @@ public class DAOUserRepository {
 			stmt.setString(2, mLogin.getPass());
 			stmt.setString(3, mLogin.getNome());
 			stmt.setString(4, mLogin.getEmail());
-			
+			stmt.setLong(5, user);
+
 			stmt.execute();
 			
 			connection.commit();
@@ -53,19 +54,20 @@ public class DAOUserRepository {
 			
 		}
 		
-		return this.pesquisar(mLogin.getUser());
+		return this.pesquisar(mLogin.getUser(),user);
 		
 	}
 	
-	public List<ModelLogin> consultaUsuarioList(String nome) throws SQLException {
+	public List<ModelLogin> consultaUsuarioList(String nome, Long user) throws SQLException {
 		
 		List<ModelLogin> users = new ArrayList<>();
 		
-		String sql = "SELECT * FROM \"user\" WHERE UPPER(nome) LIKE UPPER(?)";
+		String sql = "SELECT * FROM \"user\" WHERE UPPER(nome) LIKE UPPER(?) AND useradmin IS false AND id_user = ?";
 		
 		PreparedStatement stmt = connection.prepareStatement(sql);
 		
 		stmt.setString(1, "%" + nome + "%");
+		stmt.setLong(2, user);
 		
 		ResultSet rs = stmt.executeQuery();
 		
@@ -85,11 +87,11 @@ public class DAOUserRepository {
 		return users ;
 	}
 	
-	public List<ModelLogin> consultaAll() throws SQLException {
+	public List<ModelLogin> consultaAll(Long user) throws SQLException {
 		
 		List<ModelLogin> users = new ArrayList<>();
 		
-		String sql = "SELECT * FROM \"user\"";
+		String sql = "SELECT * FROM \"user\" WHERE useradmin IS false AND id_user = " + user;
 		
 		PreparedStatement stmt = connection.prepareStatement(sql);
 		
@@ -111,7 +113,7 @@ public class DAOUserRepository {
 		return users ;
 	}
 	
-	public ModelLogin pesquisar(String user) throws SQLException {
+	public ModelLogin pesquisarLogado(String user) throws SQLException {
 		
 		ModelLogin mLogin = new ModelLogin();
 		
@@ -134,15 +136,62 @@ public class DAOUserRepository {
 		return mLogin;
 	}
 	
-	public ModelLogin pesquisarId(String id) throws SQLException {
+	public ModelLogin pesquisar(String user) throws SQLException {
 		
 		ModelLogin mLogin = new ModelLogin();
 		
-		String sql = "SELECT * FROM \"user\" WHERE id = ?";
+		String sql = "SELECT * FROM \"user\" WHERE login = '" + user + "' AND useradmin IS false";
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			mLogin.setId(rs.getLong("id"));
+			mLogin.setEmail(rs.getString("email"));
+			mLogin.setNome(rs.getString("nome"));
+			mLogin.setPass(rs.getString("pass"));
+			mLogin.setUser(rs.getString("login"));
+			
+		}
+		
+		return mLogin;
+	}
+	
+	public ModelLogin pesquisar(String user, Long userLogado) throws SQLException {
+		
+		ModelLogin mLogin = new ModelLogin();
+		
+		String sql = "SELECT * FROM \"user\" WHERE login = '" + user + "' AND useradmin IS false AND id_user = " + userLogado;
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			mLogin.setId(rs.getLong("id"));
+			mLogin.setEmail(rs.getString("email"));
+			mLogin.setNome(rs.getString("nome"));
+			mLogin.setPass(rs.getString("pass"));
+			mLogin.setUser(rs.getString("login"));
+			
+		}
+		
+		return mLogin;
+	}
+	
+	public ModelLogin pesquisarId(String id, Long user) throws SQLException {
+		
+		ModelLogin mLogin = new ModelLogin();
+		
+		String sql = "SELECT * FROM \"user\" WHERE id = ? AND useradmin IS false AND id_user = ?";
 		
 		PreparedStatement stmt = connection.prepareStatement(sql);
 		
 		stmt.setLong(1, Long.parseLong(id));
+		stmt.setLong(2, user);
 		
 		ResultSet rs = stmt.executeQuery();
 		
@@ -175,7 +224,7 @@ public class DAOUserRepository {
 	
 	public void deletar(String id) throws SQLException {
 		
-		String sql = "DELETE FROM \"user\" WHERE id = ?";
+		String sql = "DELETE FROM \"user\" WHERE id = ? AND useradmin IS false";
 		
 		PreparedStatement stmt = connection.prepareStatement(sql);
 		

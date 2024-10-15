@@ -27,3 +27,9 @@ ALTER TABLE IF EXISTS public."user"
     
 INSERT INTO public."user"(login, pass,nome,email)
 	VALUES ('admin', 'admin',,'acgm','acgm@acgm.com');
+	
+ALTER TABLE "user" ADD COLUMN useradmin NOT NULL BOOLEAN DEFAULT false;
+
+ALTER TABLE "user" ADD COLUMN id_user BIGINT NOT NULL DEFAULT 1;
+
+ALTER TABLE "user" ADD CONSTRAINT fk_user FOREIGN KEY (id_user) REFERENCES "user" (id);
