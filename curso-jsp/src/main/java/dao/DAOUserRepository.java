@@ -130,6 +130,7 @@ public class DAOUserRepository {
 			mLogin.setNome(rs.getString("nome"));
 			mLogin.setPass(rs.getString("pass"));
 			mLogin.setUser(rs.getString("login"));
+			mLogin.setUseradmin(rs.getBoolean("useradmin"));
 			
 		}
 		

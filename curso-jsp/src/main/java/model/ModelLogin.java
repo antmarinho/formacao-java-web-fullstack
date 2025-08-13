@@ -11,6 +11,7 @@ public class ModelLogin implements Serializable{
 	private String email;
 	private String user;
 	private String pass;
+	private boolean useradmin;
 	
 	public ModelLogin() {}
 	
@@ -77,5 +78,15 @@ public class ModelLogin implements Serializable{
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
+
+	public boolean getUseradmin() {
+		return useradmin;
+	}
+
+	public void setUseradmin(boolean useradmin) {
+		this.useradmin = useradmin;
+	}
+	
+	
 	
 }
