@@ -23,7 +23,7 @@ public class DAOUserRepository {
 		
 		if(mLogin.isNovo()) {
 		
-			String sql = "INSERT INTO \"user\"(login,pass,nome,email,id_user) VALUES (?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO \"user\"(login,pass,nome,email,id_user,perfil) VALUES (?,?,?,?,?,?)";
 			
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
@@ -32,6 +32,7 @@ public class DAOUserRepository {
 			stmt.setString(3, mLogin.getNome());
 			stmt.setString(4, mLogin.getEmail());
 			stmt.setLong(5, user);
+			stmt.setString(6, mLogin.getPerfil());
 
 			stmt.execute();
 			
@@ -39,7 +40,7 @@ public class DAOUserRepository {
 			
 		}else {
 			
-			String sql = "UPDATE \"user\" SET login = ?, pass = ?, nome = ?, email = ? WHERE id = " + mLogin.getId() + "";
+			String sql = "UPDATE \"user\" SET login = ?, pass = ?, nome = ?, email = ?, perfil = ? WHERE id = " + mLogin.getId() + "";
 			
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
@@ -47,6 +48,7 @@ public class DAOUserRepository {
 			stmt.setString(2, mLogin.getPass());
 			stmt.setString(3, mLogin.getNome());
 			stmt.setString(4, mLogin.getEmail());
+			stmt.setString(5, mLogin.getPerfil());
 			
 			stmt.executeUpdate();
 			
@@ -131,6 +133,7 @@ public class DAOUserRepository {
 			mLogin.setPass(rs.getString("pass"));
 			mLogin.setUser(rs.getString("login"));
 			mLogin.setUseradmin(rs.getBoolean("useradmin"));
+			mLogin.setPerfil(rs.getString("perfil"));
 			
 		}
 		

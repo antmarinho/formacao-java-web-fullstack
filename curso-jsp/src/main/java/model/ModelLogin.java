@@ -12,6 +12,7 @@ public class ModelLogin implements Serializable{
 	private String user;
 	private String pass;
 	private boolean useradmin;
+	private String perfil;
 	
 	public ModelLogin() {}
 	
@@ -86,7 +87,14 @@ public class ModelLogin implements Serializable{
 	public void setUseradmin(boolean useradmin) {
 		this.useradmin = useradmin;
 	}
-	
+
+	public String getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
+	}
 	
 	
 }

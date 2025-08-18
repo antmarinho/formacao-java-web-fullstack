@@ -62,6 +62,16 @@
                                                                 <label class="float-label">E-mail (exa@gmail.com)</label>
                                                             </div>
                                                             <div class="form-group form-default form-static-label">
+	                                                            <select class="form-control" aria-label="Default select example" name="perfil">
+																  <option disabled="disabled">[Selecione o Perfil]</option>
+																  <option value="ADMIN">Admin</option>
+																  <option value="SECRETARIA">Secretaria</option>
+																  <option value="AUXILIAR">Auxiliar</option>
+																</select>
+																<span class="form-bar"></span>
+                                                                <label class="float-label">Perfil</label>
+                                                            </div>
+                                                            <div class="form-group form-default form-static-label">
                                                                 <input type="password" name="pass" id="pass" class="form-control" required="required" autocomplete="off" value="${mLogin.pass}">
                                                                 <span class="form-bar"></span>
                                                                 <label class="float-label">Senha</label>

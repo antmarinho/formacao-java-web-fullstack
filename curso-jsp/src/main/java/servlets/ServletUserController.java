@@ -119,6 +119,7 @@ public class ServletUserController extends ServletGenericUtil {
 				String email = request.getParameter("email");
 				String user = request.getParameter("user");
 				String pass = request.getParameter("pass");
+				String perfil = request.getParameter("perfil");
 				
 				ModelLogin mLogin = new ModelLogin();
 				
@@ -127,6 +128,7 @@ public class ServletUserController extends ServletGenericUtil {
 				mLogin.setNome(nome);
 				mLogin.setPass(pass);
 				mLogin.setUser(user);
+				mLogin.setPerfil(perfil);
 				
 				if(dao.validarLogin(mLogin.getUser()) && mLogin.getId() == null)
 					msg = "Ja existe usuario com msm login, informe outro login";
