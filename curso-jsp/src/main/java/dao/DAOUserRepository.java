@@ -82,6 +82,7 @@ public class DAOUserRepository {
 			ml.setNome(rs.getString("nome"));
 			//ml.setPass(rs.getNString("pass"));
 			ml.setUser(rs.getString("login"));
+			ml.setPerfil(rs.getString("prefil"));
 			
 			users.add(ml);
 		}
@@ -108,6 +109,7 @@ public class DAOUserRepository {
 			ml.setNome(rs.getString("nome"));
 			//ml.setPass(rs.getNString("pass"));
 			ml.setUser(rs.getString("login"));
+			ml.setPerfil(rs.getString("prefil"));
 			
 			users.add(ml);
 		}
@@ -157,6 +159,7 @@ public class DAOUserRepository {
 			mLogin.setNome(rs.getString("nome"));
 			mLogin.setPass(rs.getString("pass"));
 			mLogin.setUser(rs.getString("login"));
+			mLogin.setPerfil(rs.getString("perfil"));
 			
 		}
 		
@@ -180,6 +183,7 @@ public class DAOUserRepository {
 			mLogin.setNome(rs.getString("nome"));
 			mLogin.setPass(rs.getString("pass"));
 			mLogin.setUser(rs.getString("login"));
+			mLogin.setPerfil(rs.getString("perfil"));
 			
 		}
 		
@@ -206,6 +210,7 @@ public class DAOUserRepository {
 			mLogin.setNome(rs.getString("nome"));
 			mLogin.setPass(rs.getString("pass"));
 			mLogin.setUser(rs.getString("login"));
+			mLogin.setPerfil(rs.getString("perfil"));
 			
 		}
 		
