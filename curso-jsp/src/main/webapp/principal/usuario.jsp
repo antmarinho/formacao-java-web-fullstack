@@ -79,7 +79,7 @@
 																	  out.print("checked=\"checked\"");
 																	  out.print(" ");
                                                                 
-                                                                %>>>FEMININO</>
+                                                                %>>>Feminino</>
                                                             </div>
                                                             <div class="form-group form-default form-static-label">
                                                                 <input type="text" name="user" id="user" class="form-control" required="required" value="${mLogin.user}">
