@@ -60,6 +60,28 @@
                                                                 <label class="float-label">Nome</label>
                                                             </div>
                                                             <div class="form-group form-default form-static-label">
+                                                                <input type="radio" name="sexo" checked="checked" value="MASCULINO" <%
+                                                                
+                                                                	ModelLogin mLogin = (ModelLogin) request.getAttribute("mLogin");
+                                                                
+                                                                	if(mLogin != null && mLogin.getSexo().equals("MASCULINO")) {
+																	  out.print(" ");
+																	  out.print("checked=\"checked\"");
+																	  out.print(" ");
+                                                                
+                                                                %>>>Masculino</>
+                                                                <input type="radio" name="sexo" checked="checked" value="FEMININO" <%
+                                                                
+                                                                	ModelLogin mLogin = (ModelLogin) request.getAttribute("mLogin");
+                                                                
+                                                                	if(mLogin != null && mLogin.getSexo().equals("FEMININO")) {
+																	  out.print(" ");
+																	  out.print("checked=\"checked\"");
+																	  out.print(" ");
+                                                                
+                                                                %>>>FEMININO</>
+                                                            </div>
+                                                            <div class="form-group form-default form-static-label">
                                                                 <input type="text" name="user" id="user" class="form-control" required="required" value="${mLogin.user}">
                                                                 <span class="form-bar"></span>
                                                                 <label class="float-label">Usuario</label>
