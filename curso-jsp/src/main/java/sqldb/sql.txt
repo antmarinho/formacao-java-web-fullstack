@@ -34,4 +34,6 @@ ALTER TABLE "user" ADD COLUMN id_user BIGINT NOT NULL DEFAULT 1;
 
 ALTER TABLE "user" ADD COLUMN perfil character varying(200);
 
+ALTER TABLE "user" ADD COLUMN sexo character varying(2);
+
 ALTER TABLE "user" ADD CONSTRAINT fk_user FOREIGN KEY (id_user) REFERENCES "user" (id);

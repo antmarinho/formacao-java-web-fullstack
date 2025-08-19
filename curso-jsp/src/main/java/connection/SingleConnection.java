@@ -5,9 +5,13 @@ import java.sql.DriverManager;
 
 public class SingleConnection {
 	
-	private static String url = "jdbc:postgresql://localhost:5432/curso-jsp";
+	/*private static String url = "jdbc:postgresql://localhost:5432/curso-jsp";
 	private static String user = "acgm";
-	private static String password = "acgm070191";
+	private static String password = "acgm070191";*/
+	
+	private static String url = "jdbc:mysql://localhost:3306/curso-jsp";
+	private static String user = "root";
+	private static String password = "";
 	
 	private static Connection connection = null;
 	
@@ -29,7 +33,8 @@ public class SingleConnection {
 			
 			if(connection == null) {
 				
-				Class.forName("org.postgresql.Driver");
+				//Class.forName("org.postgresql.Driver");
+				Class.forName("com.mysql.cj.jdbc.Driver");
 				
 				connection = DriverManager.getConnection(url, user, password);
 				connection.setAutoCommit(false);

@@ -23,7 +23,7 @@ public class DAOUserRepository {
 		
 		if(mLogin.isNovo()) {
 		
-			String sql = "INSERT INTO \"user\"(login,pass,nome,email,id_user,perfil) VALUES (?,?,?,?,?,?)";
+			String sql = "INSERT INTO \"user\"(login,pass,nome,email,id_user,perfil,sexo) VALUES (?,?,?,?,?,?,?)";
 			
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
@@ -33,6 +33,7 @@ public class DAOUserRepository {
 			stmt.setString(4, mLogin.getEmail());
 			stmt.setLong(5, user);
 			stmt.setString(6, mLogin.getPerfil());
+			stmt.setString(7, mLogin.getSexo());
 
 			stmt.execute();
 			
@@ -40,7 +41,7 @@ public class DAOUserRepository {
 			
 		}else {
 			
-			String sql = "UPDATE \"user\" SET login = ?, pass = ?, nome = ?, email = ?, perfil = ? WHERE id = " + mLogin.getId() + "";
+			String sql = "UPDATE \"user\" SET login = ?, pass = ?, nome = ?, email = ?, perfil = ?, sexo = ? WHERE id = " + mLogin.getId() + "";
 			
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
@@ -49,6 +50,7 @@ public class DAOUserRepository {
 			stmt.setString(3, mLogin.getNome());
 			stmt.setString(4, mLogin.getEmail());
 			stmt.setString(5, mLogin.getPerfil());
+			stmt.setString(6, mLogin.getSexo());
 			
 			stmt.executeUpdate();
 			
@@ -83,6 +85,7 @@ public class DAOUserRepository {
 			//ml.setPass(rs.getNString("pass"));
 			ml.setUser(rs.getString("login"));
 			ml.setPerfil(rs.getString("prefil"));
+			ml.setSexo(rs.getString("sexo"));
 			
 			users.add(ml);
 		}
@@ -110,6 +113,7 @@ public class DAOUserRepository {
 			//ml.setPass(rs.getNString("pass"));
 			ml.setUser(rs.getString("login"));
 			ml.setPerfil(rs.getString("prefil"));
+			ml.setSexo(rs.getString("sexo"));
 			
 			users.add(ml);
 		}
@@ -136,6 +140,7 @@ public class DAOUserRepository {
 			mLogin.setUser(rs.getString("login"));
 			mLogin.setUseradmin(rs.getBoolean("useradmin"));
 			mLogin.setPerfil(rs.getString("perfil"));
+			mLogin.setSexo(rs.getString("sexo"));
 			
 		}
 		
@@ -160,6 +165,7 @@ public class DAOUserRepository {
 			mLogin.setPass(rs.getString("pass"));
 			mLogin.setUser(rs.getString("login"));
 			mLogin.setPerfil(rs.getString("perfil"));
+			mLogin.setSexo(rs.getString("sexo"));
 			
 		}
 		
@@ -184,6 +190,7 @@ public class DAOUserRepository {
 			mLogin.setPass(rs.getString("pass"));
 			mLogin.setUser(rs.getString("login"));
 			mLogin.setPerfil(rs.getString("perfil"));
+			mLogin.setSexo(rs.getString("sexo"));
 			
 		}
 		
@@ -211,6 +218,7 @@ public class DAOUserRepository {
 			mLogin.setPass(rs.getString("pass"));
 			mLogin.setUser(rs.getString("login"));
 			mLogin.setPerfil(rs.getString("perfil"));
+			mLogin.setSexo(rs.getString("sexo"));
 			
 		}
 		
