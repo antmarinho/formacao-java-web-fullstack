@@ -36,4 +36,8 @@ ALTER TABLE "user" ADD COLUMN perfil character varying(200);
 
 ALTER TABLE "user" ADD COLUMN sexo character varying(2);
 
+ALTER TABLE "user" ADD COLUMN fotouser text;
+
+ALTER TABLE "user" ADD COLUMN extensaofoto character varying(15);
+
 ALTER TABLE "user" ADD CONSTRAINT fk_user FOREIGN KEY (id_user) REFERENCES "user" (id);
