@@ -38,7 +38,7 @@
                                                     <div class="card-block">
                                                         <h4 class="sub-title">Cadastro de usuario</h4>
                                                         
-                                                         <form class="form-material" action="<%= request.getContextPath()%>/ServletUserController" method="post" id="form-user">
+                                                         <form class="form-material" enctype="multipart/form-data" action="<%= request.getContextPath()%>/ServletUserController" method="post" id="form-user">
                                                          
                                                          	<input type="hidden" name="acao" id="acao" value="">
                                                          	
@@ -49,9 +49,14 @@
                                                             </div>
                                                             <div class="form-group form-default input-group mb-4">
                                                                 <div class="input-group-prepend">
-                                                                	<img alt="Imagem User" src="<%= request.getContextPath() %>/assets/images/avatar-blank.jpg" width="70px">
+                                                                	<c:if test="${mLogin.fotoUser != ''}">
+                                                                		<img id="foto" alt="Imagem User" src="${mLogin.fotoUser}" width="70px">
+                                                                	</c:if>
+                                                                	<c:if test="${mLogin.fotoUser == '' || mLogin.fotoUser == null}">
+                                                                		<img id="foto" alt="Imagem User" src="assets/images/avatar-blank.jpg" width="70px">
+                                                                	</c:if>
                                                                 </div>
-                                                                <input type="file" class="form-control-file" style="margin-top: 15px; margin-left: 5px;">
+                                                                <input id="filefoto" type="file" name="filefoto" accept="image/" onchange="visualizarImg('foto','filefoto')" class="form-control-file" style="margin-top: 15px; margin-left: 5px;">
                                                             </div>
                                                             
                                                             <div class="form-group form-default form-static-label">
@@ -69,7 +74,7 @@
 																	  out.print("checked=\"checked\"");
 																	  out.print(" ");
                                                                 
-                                                                %>>>Masculino</>
+                                                                %>>Masculino</>
                                                                 <input type="radio" name="sexo" checked="checked" value="FEMININO" <%
                                                                 
                                                                 	ModelLogin mLogin = (ModelLogin) request.getAttribute("mLogin");
@@ -79,7 +84,7 @@
 																	  out.print("checked=\"checked\"");
 																	  out.print(" ");
                                                                 
-                                                                %>>>Feminino</>
+                                                                %>>Feminino</>
                                                             </div>
                                                             <div class="form-group form-default form-static-label">
                                                                 <input type="text" name="user" id="user" class="form-control" required="required" value="${mLogin.user}">
@@ -159,7 +164,7 @@
 											    	<tr>
 											    		<td><c:out value="${ml.id}"></c:out></td>
 											    		<td><c:out value="${ml.nome}"></c:out></td>
-											    		<td><a class="btn btn-info" href="<%= request.getContextPath() %>/ServletUserController?acao=editar&id=${ml.id}">Ver</a></td>
+											    		<td><a class="btn btn-info" href="<%=request.getContextPath() %>/ServletUserController?acao=editar&id=${ml.id}">Ver</a></td>
 											    	</tr>
 											    </c:forEach>
 											  </tbody>
@@ -217,6 +222,29 @@
 	  </div>
 	</div>
     <script type="text/javascript">
+    
+    
+    	function visualizarImg(foto,filefoto) {
+			
+    		var preview = document.getElementById(foto);
+    		var fileUser = document.getElementById(filefoto).files[0];
+    		var reader = new FileReader();
+    		
+    		reader.onloadend = function() {
+    		
+    			preview.src = reader.result; /* carrega a foto na tela*/
+    		
+    		};
+    		
+    		if(fileUser){
+    			reader.readAsDataURL(fileUser); /*preview da imagem*/
+    		}
+    		else {
+    			preview.src = '';
+    		}
+    		
+		}
+    
     
     	function editar(id) {
     		

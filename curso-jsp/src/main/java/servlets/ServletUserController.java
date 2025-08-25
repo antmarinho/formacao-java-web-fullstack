@@ -7,11 +7,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import model.ModelLogin;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.IOUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -132,6 +135,26 @@ public class ServletUserController extends ServletGenericUtil {
 				mLogin.setUser(user);
 				mLogin.setPerfil(perfil);
 				mLogin.setSexo(sexo);
+				
+				
+				
+				if(ServletFileUpload.isMultipartContent((javax.servlet.http.HttpServletRequest) request)) {
+					
+					Part part = request.getPart("filefoto");
+					
+					if(part.getSize() > 0) {
+						
+						byte[] foto = IOUtils.toByteArray(part.getInputStream());
+						
+						String imagem = "data:image/"+ part.getContentType().split("\\/")[1] + ";base64," +  new org.apache.tomcat.util.codec.binary.Base64().encodeBase64String(foto);
+						
+						mLogin.setFotoUser(imagem);
+						mLogin.setExtensaoFoto(part.getContentType().split("\\/")[1]);
+						
+						
+					}
+					
+				}
 				
 				if(dao.validarLogin(mLogin.getUser()) && mLogin.getId() == null)
 					msg = "Ja existe usuario com msm login, informe outro login";

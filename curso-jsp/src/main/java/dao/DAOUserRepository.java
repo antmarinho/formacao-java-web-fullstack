@@ -39,6 +39,22 @@ public class DAOUserRepository {
 			
 			connection.commit();
 			
+			if(mLogin.getFotoUser() != null && mLogin.getFotoUser().isEmpty()) {
+				
+				sql = "UPDATE UPDATE \"user\" SET fotouser = ?, extensaofoto = ? WHERE login = ?";
+				
+				stmt = connection.prepareStatement(sql);
+				
+				stmt.setString(1, mLogin.getFotoUser());
+				stmt.setString(1, mLogin.getExtensaoFoto());
+				stmt.setString(1, mLogin.getUser());
+				
+				stmt.execute();
+				
+				connection.commit();
+				
+			}
+			
 		}else {
 			
 			String sql = "UPDATE \"user\" SET login = ?, pass = ?, nome = ?, email = ?, perfil = ?, sexo = ? WHERE id = " + mLogin.getId() + "";
@@ -55,6 +71,22 @@ public class DAOUserRepository {
 			stmt.executeUpdate();
 			
 			connection.commit();
+			
+			if(mLogin.getFotoUser() != null && mLogin.getFotoUser().isEmpty()) {
+				
+				sql = "UPDATE UPDATE \"user\" SET fotouser = ?, extensaofoto = ? WHERE id = ?";
+				
+				stmt = connection.prepareStatement(sql);
+				
+				stmt.setString(1, mLogin.getFotoUser());
+				stmt.setString(1, mLogin.getExtensaoFoto());
+				stmt.setLong(3, mLogin.getId());
+				
+				stmt.execute();
+				
+				connection.commit();
+				
+			}
 			
 		}
 		
@@ -141,6 +173,7 @@ public class DAOUserRepository {
 			mLogin.setUseradmin(rs.getBoolean("useradmin"));
 			mLogin.setPerfil(rs.getString("perfil"));
 			mLogin.setSexo(rs.getString("sexo"));
+			mLogin.setFotoUser(rs.getNString("fotouser"));
 			
 		}
 		
@@ -166,6 +199,7 @@ public class DAOUserRepository {
 			mLogin.setUser(rs.getString("login"));
 			mLogin.setPerfil(rs.getString("perfil"));
 			mLogin.setSexo(rs.getString("sexo"));
+			mLogin.setFotoUser(rs.getNString("fotouser"));
 			
 		}
 		
@@ -191,6 +225,7 @@ public class DAOUserRepository {
 			mLogin.setUser(rs.getString("login"));
 			mLogin.setPerfil(rs.getString("perfil"));
 			mLogin.setSexo(rs.getString("sexo"));
+			mLogin.setFotoUser(rs.getNString("fotouser"));
 			
 		}
 		
@@ -219,6 +254,7 @@ public class DAOUserRepository {
 			mLogin.setUser(rs.getString("login"));
 			mLogin.setPerfil(rs.getString("perfil"));
 			mLogin.setSexo(rs.getString("sexo"));
+			mLogin.setFotoUser(rs.getNString("fotouser"));
 			
 		}
 		

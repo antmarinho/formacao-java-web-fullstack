@@ -36,6 +36,21 @@
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
 			<version>2.0.0</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-util -->
+<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-util -->
+<dependency>
+    <groupId>commons-fileupload</groupId>
+    <artifactId>commons-fileupload</artifactId>
+    <version>1.5</version> <!-- Use the latest stable version -->
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-util -->
+<dependency>
+    <groupId>org.apache.tomcat</groupId>
+    <artifactId>tomcat-util</artifactId>
+    <version>8.5.23</version>
+</dependency>
 
   </dependencies>
   <build>
