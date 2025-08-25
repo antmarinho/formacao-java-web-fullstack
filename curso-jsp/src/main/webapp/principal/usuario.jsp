@@ -50,7 +50,9 @@
                                                             <div class="form-group form-default input-group mb-4">
                                                                 <div class="input-group-prepend">
                                                                 	<c:if test="${mLogin.fotoUser != ''}">
-                                                                		<img id="foto" alt="Imagem User" src="${mLogin.fotoUser}" width="70px">
+                                                                		<a href="<%= request.getContextPath()%>/ServletUserController?acao=downloadFoto&id=${mLogin.id}">
+                                                                			<img id="foto" alt="Imagem User" src="${mLogin.fotoUser}" width="70px">
+                                                                		</a>
                                                                 	</c:if>
                                                                 	<c:if test="${mLogin.fotoUser == '' || mLogin.fotoUser == null}">
                                                                 		<img id="foto" alt="Imagem User" src="assets/images/avatar-blank.jpg" width="70px">

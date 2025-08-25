@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
+import org.apache.tomcat.util.codec.binary.Base64;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -91,6 +92,19 @@ public class ServletUserController extends ServletGenericUtil {
 				request.setAttribute("mLogins",users);
 				
 				request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
+			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("downloadFoto")) {
+				
+				String id = request.getParameter("id");
+				
+				ModelLogin ml = dao.pesquisarId(id, super.getUserLogado(request));
+				
+				if(ml.getFotoUser() != null && !ml.getFotoUser().isEmpty()) {
+					
+					response.setHeader("Content-Disposition", "attachment;filename=arquivo." + ml.getExtensaoFoto());
+					response.getOutputStream().write(new Base64().decodeBase64(ml.getFotoUser().split("\\,")[1]));
+					
+				}
+				
 			}
 			
 			else {

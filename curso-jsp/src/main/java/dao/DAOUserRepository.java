@@ -255,6 +255,7 @@ public class DAOUserRepository {
 			mLogin.setPerfil(rs.getString("perfil"));
 			mLogin.setSexo(rs.getString("sexo"));
 			mLogin.setFotoUser(rs.getNString("fotouser"));
+			mLogin.setExtensaoFoto(rs.getNString("extensaofoto"));
 			
 		}
 		
