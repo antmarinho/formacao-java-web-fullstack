@@ -139,6 +139,13 @@ public class ServletUserController extends ServletGenericUtil {
 				String pass = request.getParameter("pass");
 				String perfil = request.getParameter("perfil");
 				String sexo = request.getParameter("sexo");
+				String cep = request.getParameter("cep");
+				String endereco = request.getParameter("endereco");
+				String bairro = request.getParameter("bairro");
+				String cidade = request.getParameter("localidade");
+				String estado = request.getParameter("uf");
+				String complemento = request.getParameter("complemento");
+				String numero = request.getParameter("numero");
 				
 				ModelLogin mLogin = new ModelLogin();
 				
@@ -149,7 +156,13 @@ public class ServletUserController extends ServletGenericUtil {
 				mLogin.setUser(user);
 				mLogin.setPerfil(perfil);
 				mLogin.setSexo(sexo);
-				
+				mLogin.setBairro(bairro);
+				mLogin.setCep(cep);
+				mLogin.setLogradouro(endereco);
+				mLogin.setLocalidade(cidade);
+				mLogin.setUf(estado);
+				mLogin.setComplemento(complemento);
+				mLogin.setNumero(numero);
 				
 				
 				if(ServletFileUpload.isMultipartContent((javax.servlet.http.HttpServletRequest) request)) {

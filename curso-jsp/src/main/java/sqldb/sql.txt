@@ -40,4 +40,19 @@ ALTER TABLE "user" ADD COLUMN fotouser text;
 
 ALTER TABLE "user" ADD COLUMN extensaofoto character varying(15);
 
+ALTER TABLE "user" ADD COLUMN cep character varying(15);
+
+ALTER TABLE "user" ADD COLUMN logradouro character varying(200);
+
+ALTER TABLE "user" ADD COLUMN bairro character varying(200);
+
+ALTER TABLE "user" ADD COLUMN localidade character varying(200);
+
+ALTER TABLE "user" ADD COLUMN uf character varying(3);
+
+ALTER TABLE "user" ADD COLUMN complemento character varying(200);
+
+ALTER TABLE "user" ADD COLUMN numero character varying(15);
+
+
 ALTER TABLE "user" ADD CONSTRAINT fk_user FOREIGN KEY (id_user) REFERENCES "user" (id);
