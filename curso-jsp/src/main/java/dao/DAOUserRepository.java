@@ -112,7 +112,7 @@ public class DAOUserRepository {
 		
 		List<ModelLogin> users = new ArrayList<>();
 		
-		String sql = "SELECT * FROM \"user\" WHERE UPPER(nome) LIKE UPPER(?) AND useradmin IS false AND id_user = ?";
+		String sql = "SELECT * FROM \"user\" WHERE UPPER(nome) LIKE UPPER(?) AND useradmin IS false AND id_user = ? LIMIT 5";
 		
 		PreparedStatement stmt = connection.prepareStatement(sql);
 		
@@ -139,11 +139,39 @@ public class DAOUserRepository {
 		return users ;
 	}
 	
+	public List<ModelLogin> consultaAllPaginada(Long user, Integer offset) throws SQLException {
+		
+		List<ModelLogin> users = new ArrayList<>();
+		
+		String sql = "SELECT * FROM \"user\" WHERE useradmin IS false AND id_user = " + user + " ORDER BY none OFFSET " + offset + " LIMIT 5";
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			ModelLogin ml = new ModelLogin();
+			
+			ml.setEmail(rs.getString("email"));
+			ml.setId(rs.getLong("id"));
+			ml.setNome(rs.getString("nome"));
+			//ml.setPass(rs.getNString("pass"));
+			ml.setUser(rs.getString("login"));
+			ml.setPerfil(rs.getString("prefil"));
+			ml.setSexo(rs.getString("sexo"));
+			
+			users.add(ml);
+		}
+		
+		return users ;
+	}
+	
 	public List<ModelLogin> consultaAll(Long user) throws SQLException {
 		
 		List<ModelLogin> users = new ArrayList<>();
 		
-		String sql = "SELECT * FROM \"user\" WHERE useradmin IS false AND id_user = " + user;
+		String sql = "SELECT * FROM \"user\" WHERE useradmin IS false AND id_user = " + user + "LIMIT 5";
 		
 		PreparedStatement stmt = connection.prepareStatement(sql);
 		
@@ -329,6 +357,27 @@ public class DAOUserRepository {
 		stmt.executeUpdate();
 		
 		connection.commit();
+	}
+	
+	public int totalPagina(Long user) throws SQLException {
+		
+		String sql = "SELECT COUNT(1) AS total FROM \"user\" WHERE id = " + user;
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		rs.next();
+		
+		Double cadastros = rs.getDouble("total");
+		
+		Double qtdPagina = (cadastros/5) % 2;
+		
+		if(qtdPagina > 0)
+			qtdPagina ++;
+		
+		return qtdPagina.intValue();
+		
 	}
 	
 }

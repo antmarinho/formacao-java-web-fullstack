@@ -214,7 +214,28 @@
 											  </tbody>
 											</table>
 										</div>
-                                    </div>
+
+										<nav aria-label="Page navigation example">
+											<ul class="pagination">
+												
+												<%
+												
+													int totalPagina = (int) request.getAttribute("totalPagina");
+												
+													for(i = 0; i < totalPagina; i++) {
+														
+														String url = request.getContextPath() + "/ServletUserController?acao=paginar&pagina=" + (i*5);
+														
+														out.print("<li class=\"page-item\"><a class=\"page-link\" href=\""+ url +"\">"+ (i + 1) +"</a></li>");
+														
+													}
+												
+												%>
+											
+											</ul>
+										</nav>
+
+									</div>
                                     <!-- Page-body end -->
                                 </div>
                                 <div id="styleSelector"> </div>
