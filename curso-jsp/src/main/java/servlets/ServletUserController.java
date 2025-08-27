@@ -70,6 +70,7 @@ public class ServletUserController extends ServletGenericUtil {
 				
 				String json = mapper.writeValueAsString(usersJson);
 				
+				response.addHeader("totalPagina", "" + dao.consultaUsuarioListTotalPaginaPaginacao(nome, super.getUserLogado(request)));
 				response.getWriter().write(json);
 				
 			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("editar")) {

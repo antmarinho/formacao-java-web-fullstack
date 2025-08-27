@@ -321,6 +321,13 @@
 							</tbody>
 						</table>
 					</div>
+					
+					<nav aria-label="Page navigation example"> 
+						<ul class="pagination" id="ulPaginacaoAjax">
+						
+						
+						</ul>
+					</nav>
 					<span id="total"></span>
 				</div>
 				<div class="modal-footer">
@@ -404,16 +411,28 @@
     				method: "get",
     				url: urlAction,
     				data: "nome=" + nome + "&acao=buscarAjax",
-    				success: function(response) {
+    				success: function(response, textStatus, xhr) {
 
     					var json = JSON.parse(response);
     					
     					$('#tabela > tbody > tr').remove();
+    					$("#ulPaginacaoAjax > li").remove();
     					
     					for(let i = 0; i < json.length; i++) 
     						$('#tabela > tbody').append('<tr> <td>' + json[i].id + '</td> <td>' + json[i].nome + '</td> <td> <button onclick="editar(' + json[i].id + ')" class="btn btn-info">Ver</button> </td> </tr>');
 						
     					document.getElementById("total").textContent = "Resultados: " + json.length;
+    					
+    					var totalPagina = xhr.getResponseHeader("totalPagina");
+    					
+    					for(int i = 0; i < totalPagina; i++) {
+    						
+    						var url = urlAction + "?nome=" + nome + "&acao=buscarAjaxPage&pagina=" + (i*5);
+    						
+    						$("#ulPaginacaoAjax").append('<li class="page-item"><a class="page-link" href=' + url + '>' + (i+1) + '</a></li>');
+							
+						}
+    					
 					}
     				
     				
