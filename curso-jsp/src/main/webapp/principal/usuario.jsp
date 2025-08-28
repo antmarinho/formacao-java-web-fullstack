@@ -219,6 +219,9 @@
 															<button type="button"
 																class="btn btn-danger waves-effect waves-light"
 																onclick="deleteAjax()">Excluir</button>
+															<c:if test="${mLogin.id > 0}">
+																<a href="<%= request.getContextPath() %>/ServletTelefone?idUser=${mLogin.id}" class="btn btn-warning waves-effect waves-light">Telefone</a>
+															</c:if>
 															<!-- Button trigger modal -->
 															<button type="button" class="btn btn-secondary"
 																data-toggle="modal" data-target="#exampleModalUsuario">Pesquisar</button>
