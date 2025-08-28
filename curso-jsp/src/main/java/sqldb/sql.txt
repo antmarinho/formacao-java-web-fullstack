@@ -55,3 +55,25 @@ ALTER TABLE "user" ADD COLUMN complemento character varying(200);
 ALTER TABLE "user" ADD COLUMN numero character varying(15);
 
 ALTER TABLE "user" ADD CONSTRAINT fk_user FOREIGN KEY (id_user) REFERENCES "user" (id);
+
+CREATE SEQUENCE telefone_seq
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+CREATE TABLE telefone 
+(
+
+	id integer NOT NULL DEFAULT nextval('telefone_seq'::regclass),
+	numero character varying(50) NOT NULL,
+	user_id bigint NOT NULL,
+	user_cad_id bigint NOT NULL,
+	
+	CONSTRAINT telefone_pkey PRIMARY KEY (id),
+	CONSTRAINT user_id_fk FOREIGN KEY (user_id) REFERENCES "user" (id),
+	CONSTRAINT user_cad_fk FOREIGN KEY (user_id) REFERENCES "user" (id),
+
+)
+

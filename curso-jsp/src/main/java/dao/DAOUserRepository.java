@@ -387,6 +387,42 @@ public class DAOUserRepository {
 		return mLogin;
 	}
 	
+	public ModelLogin pesquisarId(Long id) throws SQLException {
+		
+		ModelLogin mLogin = new ModelLogin();
+		
+		String sql = "SELECT * FROM \"user\" WHERE id = ? AND useradmin IS false";
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		stmt.setLong(1, id);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			mLogin.setId(rs.getLong("id"));
+			mLogin.setEmail(rs.getString("email"));
+			mLogin.setNome(rs.getString("nome"));
+			mLogin.setPass(rs.getString("pass"));
+			mLogin.setUser(rs.getString("login"));
+			mLogin.setPerfil(rs.getString("perfil"));
+			mLogin.setSexo(rs.getString("sexo"));
+			mLogin.setFotoUser(rs.getNString("fotouser"));
+			mLogin.setExtensaoFoto(rs.getNString("extensaofoto"));
+			mLogin.setCep(rs.getNString("cep"));
+			mLogin.setLogradouro(rs.getNString("logradouro"));
+			mLogin.setLocalidade(rs.getNString("localidade"));
+			mLogin.setBairro(rs.getNString("bairro"));
+			mLogin.setUf(rs.getNString("uf"));
+			mLogin.setComplemento(rs.getNString("complemento"));
+			mLogin.setNumero(rs.getNString("numero"));
+			
+		}
+		
+		return mLogin;
+	}
+	
 	public boolean validarLogin(String login) throws SQLException {
 		
 		String sql = "SELECT count(1) > 0 AS existe from \"user\" where login = '" + login + "'";
