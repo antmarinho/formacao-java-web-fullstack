@@ -397,6 +397,50 @@
     		window.location.href = urlAction + "?acao=editar&id=" + id;
 			
 		}
+    	
+    	function buscaUserPagAjax(url) {
+    		
+    		
+    		var urlAction = document.getElementById("form-user").action;
+    		var nome = document.getElementById("nomeBusca").value;
+    		
+    		$.ajax({
+				
+				method: "get",
+				url: urlAction,
+				data: url,
+				success: function(response, textStatus, xhr) {
+
+					var json = JSON.parse(response);
+					
+					$('#tabela > tbody > tr').remove();
+					$("#ulPaginacaoAjax > li").remove();
+					
+					for(let i = 0; i < json.length; i++) 
+						$('#tabela > tbody').append('<tr> <td>' + json[i].id + '</td> <td>' + json[i].nome + '</td> <td> <button onclick="editar(' + json[i].id + ')" class="btn btn-info">Ver</button> </td> </tr>');
+					
+					document.getElementById("total").textContent = "Resultados: " + json.length;
+					
+					var totalPagina = xhr.getResponseHeader("totalPagina");
+					
+					for(int i = 0; i < totalPagina; i++) {
+						
+						var url = 'nome=' + nome + '&acao=buscarAjaxPage&pagina=' + (i*5);
+						
+						$("#ulPaginacaoAjax").append('<li class="page-item"><a class="page-link" href="#" onclick="buscaUserPagAjax(\'' + url + '\')">' + (i+1) + '</a></li>');
+						
+					}
+					
+				}
+				
+				
+			}).fail(function(xhr,status,errorThrown){
+				
+				alert("Erro ao buscar usuario por nome: " + xhr.responseText);
+			});
+    	
+    	
+    	}
     
     	function buscarUsuario() {
     		
@@ -427,9 +471,9 @@
     					
     					for(int i = 0; i < totalPagina; i++) {
     						
-    						var url = urlAction + "?nome=" + nome + "&acao=buscarAjaxPage&pagina=" + (i*5);
+    						var url = 'nome=' + nome + '&acao=buscarAjaxPage&pagina=' + (i*5);
     						
-    						$("#ulPaginacaoAjax").append('<li class="page-item"><a class="page-link" href=' + url + '>' + (i+1) + '</a></li>');
+    						$("#ulPaginacaoAjax").append('<li class="page-item"><a class="page-link" href="#" onclick="buscaUserPagAjax(\'' + url + '\')">' + (i+1) + '</a></li>');
 							
 						}
     					

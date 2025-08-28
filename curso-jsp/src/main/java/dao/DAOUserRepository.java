@@ -163,6 +163,37 @@ public class DAOUserRepository {
 		return users ;
 	}
 	
+	public List<ModelLogin> consultaUsuarioListOffset(String nome, Long user, int offset) throws SQLException {
+		
+		List<ModelLogin> users = new ArrayList<>();
+		
+		String sql = "SELECT * FROM \"user\" WHERE UPPER(nome) LIKE UPPER(?) AND useradmin IS false AND id_user = ? OFFSET " + offset + " LIMIT 5";
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		stmt.setString(1, "%" + nome + "%");
+		stmt.setLong(2, user);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			ModelLogin ml = new ModelLogin();
+			
+			ml.setEmail(rs.getString("email"));
+			ml.setId(rs.getLong("id"));
+			ml.setNome(rs.getString("nome"));
+			//ml.setPass(rs.getNString("pass"));
+			ml.setUser(rs.getString("login"));
+			ml.setPerfil(rs.getString("prefil"));
+			ml.setSexo(rs.getString("sexo"));
+			
+			users.add(ml);
+		}
+		
+		return users ;
+	}
+	
 	public List<ModelLogin> consultaAllPaginada(Long user, Integer offset) throws SQLException {
 		
 		List<ModelLogin> users = new ArrayList<>();
