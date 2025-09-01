@@ -10,7 +10,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import model.ModelLogin;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -182,6 +184,7 @@ public class ServletUserController extends ServletGenericUtil {
 				String estado = request.getParameter("uf");
 				String complemento = request.getParameter("complemento");
 				String numero = request.getParameter("numero");
+				String dtnsc = request.getParameter("dtnsc");
 				
 				ModelLogin mLogin = new ModelLogin();
 				
@@ -199,6 +202,7 @@ public class ServletUserController extends ServletGenericUtil {
 				mLogin.setUf(estado);
 				mLogin.setComplemento(complemento);
 				mLogin.setNumero(numero);
+				mLogin.setDtnsc(new Date(new SimpleDateFormat("dd/mm/yyyy").parse(dtnsc).getTime()));
 				
 				
 				if(ServletFileUpload.isMultipartContent((javax.servlet.http.HttpServletRequest) request)) {

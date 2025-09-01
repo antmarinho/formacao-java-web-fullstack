@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class ModelLogin implements Serializable{
 
@@ -11,6 +12,7 @@ public class ModelLogin implements Serializable{
 	private String email;
 	private String user;
 	private String pass;
+	private Date dtnsc;
 	private boolean useradmin;
 	private String perfil;
 	private String sexo;
@@ -186,6 +188,13 @@ public class ModelLogin implements Serializable{
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-	
+
+	public Date getDtnsc() {
+		return dtnsc;
+	}
+
+	public void setDtnsc(Date dtnsc) {
+		this.dtnsc = dtnsc;
+	}
 	
 }

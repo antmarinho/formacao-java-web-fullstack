@@ -54,7 +54,10 @@ ALTER TABLE "user" ADD COLUMN complemento character varying(200);
 
 ALTER TABLE "user" ADD COLUMN numero character varying(15);
 
+ALTER TABLE "user" ADD COLUMN dtnsc DATE;
+
 ALTER TABLE "user" ADD CONSTRAINT fk_user FOREIGN KEY (id_user) REFERENCES "user" (id);
+
 
 CREATE SEQUENCE telefone_seq
 INCREMENT 1
