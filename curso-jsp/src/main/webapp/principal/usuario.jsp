@@ -257,8 +257,7 @@
 
 										<nav aria-label="Page navigation example">
 											<ul class="pagination">
-
-												<%
+											<%
 												
 													int totalPagina = (int) request.getAttribute("totalPagina");
 												
@@ -268,9 +267,7 @@
 														
 														out.print("<li class=\"page-item\"><a class=\"page-link\" href=\""+ url +"\">"+ (i + 1) +"</a></li>");
 														
-													}
-												
-												%>
+													}%>
 
 											</ul>
 										</nav>
@@ -342,6 +339,17 @@
 	</div>
 	<script type="text/javascript">
     
+	$("#numero").keypress(function(event) {
+		
+		return /\d/.test(String.fromCharCode(event.keyCode));
+	
+	});
+	
+	$("#cep").keypress(function(event) {
+		
+		return /\d/.test(String.fromCharCode(event.keyCode));
+	
+	});
     
     	function pesquisaCep() {
     		
