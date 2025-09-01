@@ -23,7 +23,7 @@ public class DAOUserRepository {
 		
 		if(mLogin.isNovo()) {
 		
-			String sql = "INSERT INTO \"user\"(login,pass,nome,email,id_user,perfil,sexo,cep,logradouro,bairro,localidade,uf,complemento,numero,dtnsc) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO \"user\"(login,pass,nome,email,id_user,perfil,sexo,cep,logradouro,bairro,localidade,uf,complemento,numero,dtnsc,renda) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
@@ -42,6 +42,7 @@ public class DAOUserRepository {
 			stmt.setString(13, mLogin.getComplemento());
 			stmt.setString(14, mLogin.getNumero());
 			stmt.setDate(15, mLogin.getDtnsc());
+			stmt.setDouble(16, mLogin.getRenda());
 
 			stmt.execute();
 			
@@ -65,7 +66,7 @@ public class DAOUserRepository {
 			
 		}else {
 			
-			String sql = "UPDATE \"user\" SET login = ?, pass = ?, nome = ?, email = ?, perfil = ?, sexo = ?, cep = ?, logradouro = ?, bairro = ?, localidade = ?, uf = ?, complemento = ?, numero = ?, dtnsc = ? WHERE id = " + mLogin.getId() + "";
+			String sql = "UPDATE \"user\" SET login = ?, pass = ?, nome = ?, email = ?, perfil = ?, sexo = ?, cep = ?, logradouro = ?, bairro = ?, localidade = ?, uf = ?, complemento = ?, numero = ?, dtnsc = ?, renda = ? WHERE id = " + mLogin.getId() + "";
 			
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
@@ -83,6 +84,7 @@ public class DAOUserRepository {
 			stmt.setString(12, mLogin.getComplemento());
 			stmt.setString(13, mLogin.getNumero());
 			stmt.setDate(14, mLogin.getDtnsc());
+			stmt.setDouble(15, mLogin.getRenda());
 			
 			stmt.executeUpdate();
 			
@@ -280,6 +282,8 @@ public class DAOUserRepository {
 			mLogin.setUf(rs.getNString("uf"));
 			mLogin.setComplemento(rs.getNString("complemento"));
 			mLogin.setNumero(rs.getNString("numero"));
+			mLogin.setDtnsc(rs.getDate("dtnsc"));
+			mLogin.setRenda(rs.getDouble("renda"));
 			
 		}
 		
@@ -313,6 +317,8 @@ public class DAOUserRepository {
 			mLogin.setUf(rs.getNString("uf"));
 			mLogin.setComplemento(rs.getNString("complemento"));
 			mLogin.setNumero(rs.getNString("numero"));
+			mLogin.setDtnsc(rs.getDate("dtnsc"));
+			mLogin.setRenda(rs.getDouble("renda"));
 			
 		}
 		
@@ -346,6 +352,8 @@ public class DAOUserRepository {
 			mLogin.setUf(rs.getNString("uf"));
 			mLogin.setComplemento(rs.getNString("complemento"));
 			mLogin.setNumero(rs.getNString("numero"));
+			mLogin.setDtnsc(rs.getDate("dtnsc"));
+			mLogin.setRenda(rs.getDouble("renda"));
 			
 		}
 		
@@ -383,6 +391,8 @@ public class DAOUserRepository {
 			mLogin.setUf(rs.getNString("uf"));
 			mLogin.setComplemento(rs.getNString("complemento"));
 			mLogin.setNumero(rs.getNString("numero"));
+			mLogin.setDtnsc(rs.getDate("dtnsc"));
+			mLogin.setRenda(rs.getDouble("renda"));
 			
 		}
 		
@@ -419,6 +429,8 @@ public class DAOUserRepository {
 			mLogin.setUf(rs.getNString("uf"));
 			mLogin.setComplemento(rs.getNString("complemento"));
 			mLogin.setNumero(rs.getNString("numero"));
+			mLogin.setDtnsc(rs.getDate("dtnsc"));
+			mLogin.setRenda(rs.getDouble("renda"));
 			
 		}
 		

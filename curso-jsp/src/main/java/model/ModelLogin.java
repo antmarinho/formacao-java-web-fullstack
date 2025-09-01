@@ -13,6 +13,7 @@ public class ModelLogin implements Serializable{
 	private String user;
 	private String pass;
 	private Date dtnsc;
+	private Double renda;
 	private boolean useradmin;
 	private String perfil;
 	private String sexo;
@@ -195,6 +196,14 @@ public class ModelLogin implements Serializable{
 
 	public void setDtnsc(Date dtnsc) {
 		this.dtnsc = dtnsc;
+	}
+
+	public Double getRenda() {
+		return renda;
+	}
+
+	public void setRenda(Double renda) {
+		this.renda = renda;
 	}
 	
 }

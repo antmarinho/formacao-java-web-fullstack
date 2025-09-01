@@ -185,6 +185,9 @@ public class ServletUserController extends ServletGenericUtil {
 				String complemento = request.getParameter("complemento");
 				String numero = request.getParameter("numero");
 				String dtnsc = request.getParameter("dtnsc");
+				String renda = request.getParameter("renda");
+				
+				renda = renda.split("\\ ")[1].replaceAll("\\.","").replaceAll("\\,", ".");
 				
 				ModelLogin mLogin = new ModelLogin();
 				
@@ -203,6 +206,7 @@ public class ServletUserController extends ServletGenericUtil {
 				mLogin.setComplemento(complemento);
 				mLogin.setNumero(numero);
 				mLogin.setDtnsc(new Date(new SimpleDateFormat("dd/mm/yyyy").parse(dtnsc).getTime()));
+				mLogin.setRenda(Double.parseDouble(renda));
 				
 				
 				if(ServletFileUpload.isMultipartContent((javax.servlet.http.HttpServletRequest) request)) {

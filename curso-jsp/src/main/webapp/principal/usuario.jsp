@@ -85,6 +85,12 @@
 																<label class="float-label">Data Nascimento</label>
 															</div>
 															<div class="form-group form-default form-static-label">
+																<input type="text" name="renda" id="renda"
+																	class="form-control" required="required"
+																	value="${mLogin.renda}"> <span class="form-bar"></span>
+																<label class="float-label">Renda Mensal</label>
+															</div>
+															<div class="form-group form-default form-static-label">
 																<input type="radio" name="sexo" checked="checked"
 																	value="MASCULINO"
 																	<%
@@ -344,6 +350,8 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+	
+	$("#renda").maskMoney({showSymbol:true, symbol: "R$ ", decimal:",", thousands:"."});
 	
 	$(function() {
 		  
