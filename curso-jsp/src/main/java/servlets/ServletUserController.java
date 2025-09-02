@@ -205,7 +205,7 @@ public class ServletUserController extends ServletGenericUtil {
 				mLogin.setUf(estado);
 				mLogin.setComplemento(complemento);
 				mLogin.setNumero(numero);
-				mLogin.setDtnsc(new Date(new SimpleDateFormat("dd/mm/yyyy").parse(dtnsc).getTime()));
+				mLogin.setDtnsc(Date.valueOf(new SimpleDateFormat("yyyy-mm-dd").format(new SimpleDateFormat("dd-mm-yyyy").parse(dtnsc))));
 				mLogin.setRenda(Double.parseDouble(renda));
 				
 				

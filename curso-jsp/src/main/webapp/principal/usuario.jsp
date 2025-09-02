@@ -353,6 +353,25 @@
 	
 	$("#renda").maskMoney({showSymbol:true, symbol: "R$ ", decimal:",", thousands:"."});
 	
+	const formatter = new Intl.NumberFormat('pt-BR',{
+		
+		currency: 'BRL',
+		minimumFractionDigits: 2
+		
+	});
+	
+	$("#renda").val(formatter.format($("renda").val()));
+	
+	$("renda").focus();
+	
+	var dtnsc = $("dtnsc").val();
+	
+	var dateFormat = new Date(dtnsc);
+	
+	$("#dtnsc").val(dateFormat.toLocaleDateString('pt-BR', {timeZone: 'UTC'}));
+	
+	$("#nome").focus();
+	
 	$(function() {
 		  
 		  $("#dtnsc").datepicker({
