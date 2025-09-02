@@ -1,14 +1,18 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import connection.SingleConnection;
 import model.ModelLogin;
+import model.ModelTelefone;
 
 public class DAOUserRepository {
 	
@@ -252,6 +256,94 @@ public class DAOUserRepository {
 		}
 		
 		return users ;
+	}
+	
+	public List<ModelLogin> consultaAllRelatorio(Long user) throws SQLException {
+		
+		List<ModelLogin> users = new ArrayList<>();
+		
+		String sql = "SELECT * FROM \"user\" WHERE useradmin IS false AND id_user = " + user;
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			ModelLogin ml = new ModelLogin();
+			
+			ml.setEmail(rs.getString("email"));
+			ml.setId(rs.getLong("id"));
+			ml.setNome(rs.getString("nome"));
+			ml.setUser(rs.getString("login"));
+			ml.setPerfil(rs.getString("prefil"));
+			ml.setSexo(rs.getString("sexo"));
+			ml.setFones(this.listaFone(ml.getId()));
+			
+			users.add(ml);
+		}
+		
+		return users ;
+	}
+	
+	public List<ModelLogin> consultaAllRelatorio(Long user, String dataI, String dataF) throws SQLException, ParseException {
+		
+		List<ModelLogin> users = new ArrayList<>();
+		
+		String sql = "SELECT * FROM \"user\" WHERE useradmin IS false AND id_user = " + user + " AND dtnsc >= ? AND dtnsc <= ?";
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		stmt.setDate(1, Date.valueOf(new SimpleDateFormat("yyyy-mm-dd").format(new SimpleDateFormat("dd-mm-yyyy").parse(dataI))));
+		stmt.setDate(2, Date.valueOf(new SimpleDateFormat("yyyy-mm-dd").format(new SimpleDateFormat("dd-mm-yyyy").parse(dataF))));
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			ModelLogin ml = new ModelLogin();
+			
+			ml.setEmail(rs.getString("email"));
+			ml.setId(rs.getLong("id"));
+			ml.setNome(rs.getString("nome"));
+			ml.setUser(rs.getString("login"));
+			ml.setPerfil(rs.getString("prefil"));
+			ml.setSexo(rs.getString("sexo"));
+			ml.setFones(this.listaFone(ml.getId()));
+			
+			users.add(ml);
+		}
+		
+		return users ;
+	}
+	
+	public List<ModelTelefone> listaFone(Long id) throws SQLException {
+		
+		List<ModelTelefone> fones = new ArrayList<ModelTelefone>();
+		
+		String sql = "SELECT * FROM telefone WHERE user_id = ?";
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		stmt.setLong(1, id);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			ModelTelefone fone = new ModelTelefone();
+			
+			fone.setId(rs.getLong("id"));
+			fone.setNumero(rs.getNString("numero"));
+			fone.setUser_id(this.pesquisarId(rs.getLong("user_id")));
+			fone.setUser_cad(this.pesquisarId(rs.getLong("user_cad_id")));
+			
+			fones.add(fone);
+			
+		}
+		
+		return fones;
+		
 	}
 	
 	public ModelLogin pesquisarLogado(String user) throws SQLException {

@@ -12,6 +12,7 @@ import model.ModelLogin;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -145,6 +146,15 @@ public class ServletUserController extends ServletGenericUtil {
 				String dataInicial = request.getParameter("dataIni");
 				String dataFinal = request.getParameter("dataF");
 				
+				if(dataInicial == null || dataInicial.isEmpty() && dataFinal == null || dataFinal.isEmpty())
+					
+					request.setAttribute("listaUser", dao.consultaAllRelatorio(super.getUserLogado(request)));
+					
+				 else 
+					
+					request.setAttribute("listaUser", dao.consultaAllRelatorio(super.getUserLogado(request),dataInicial,dataFinal));
+				
+				
 				request.setAttribute("dataIni", dataInicial);
 				request.setAttribute("dataF", dataFinal);
 				request.getRequestDispatcher("principal/rel-user.jsp").forward(request, response);
@@ -168,6 +178,9 @@ public class ServletUserController extends ServletGenericUtil {
 			RequestDispatcher redir = request.getRequestDispatcher("/erro.jsp");
 			request.setAttribute("msg", e.getMessage());
 			redir.forward(request, response);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}
