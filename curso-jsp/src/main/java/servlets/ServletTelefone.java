@@ -92,20 +92,37 @@ public class ServletTelefone extends ServletGenericUtil {
 	}
 
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String user_pai = request.getParameter("id");
-		String numero = request.getParameter("numero");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		
 		try {
+
+				String user_pai = request.getParameter("id");
+				String numero = request.getParameter("numero");
 			
-				ModelTelefone fone = new ModelTelefone();
+				if(!daot.existeFone(numero, Long.parseLong(user_pai))) {
 			
-				fone.setNumero(numero);
-				fone.setUser_id(dao.pesquisarId(Long.parseLong(user_pai)));
-				fone.setUser_cad(super.getUserLogadoObj(request));
+					ModelTelefone fone = new ModelTelefone();
 				
-				daot.salvar(fone);
+					fone.setNumero(numero);
+					fone.setUser_id(dao.pesquisarId(Long.parseLong(user_pai)));
+					fone.setUser_cad(super.getUserLogadoObj(request));
+					
+					daot.salvar(fone);
+					
+					List<ModelTelefone> fones = daot.listaFone(Long.parseLong(user_pai));
+					
+					ModelLogin ml = dao.pesquisarId(Long.parseLong(user_pai));
+					
+					request.setAttribute("ml", ml);
+					request.setAttribute("fones", fones);
+					request.setAttribute("msg", "Salvo com sucesso");
+					
+					request.getRequestDispatcher("principal/telefone.jsp").forward(request, response);
+					
+				} else {
+					
+					request.setAttribute("msg", "Numero ja existe");
+				}	
 				
 				List<ModelTelefone> fones = daot.listaFone(Long.parseLong(user_pai));
 				
@@ -113,7 +130,6 @@ public class ServletTelefone extends ServletGenericUtil {
 				
 				request.setAttribute("ml", ml);
 				request.setAttribute("fones", fones);
-				request.setAttribute("msg", "Salvo com sucesso");
 				
 				request.getRequestDispatcher("principal/telefone.jsp").forward(request, response);
 				

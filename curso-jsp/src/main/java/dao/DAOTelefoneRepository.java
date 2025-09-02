@@ -68,6 +68,22 @@ public class DAOTelefoneRepository {
 		
 	}
 	
+	public boolean existeFone(String fone, Long id) throws SQLException {
+		
+		String sql = "SELECT COUNT(1) > 0 AS existe FROM telefone WHERE user_id = ? AND numero = ?";
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		
+		stmt.setLong(1, id);
+		stmt.setString(2, fone);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		rs.next();
+		
+		return rs.getBoolean("existe");
+	}
+	
 	public void deletar(Long id) throws SQLException {
 		
 		String sql = "DELETE FROM telefone where id = ?";
