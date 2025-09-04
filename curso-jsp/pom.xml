@@ -51,6 +51,12 @@
     <artifactId>tomcat-util</artifactId>
     <version>8.5.23</version>
 </dependency>
+<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
+<dependency>
+    <groupId>net.sf.jasperreports</groupId>
+    <artifactId>jasperreports</artifactId>
+    <version>6.21.5</version>
+</dependency>
 
   </dependencies>
   <build>

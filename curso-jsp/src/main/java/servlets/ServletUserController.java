@@ -9,11 +9,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import model.ModelLogin;
+import utils.ReportUtil;
+
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -159,6 +163,34 @@ public class ServletUserController extends ServletGenericUtil {
 				request.setAttribute("dataF", dataFinal);
 				request.getRequestDispatcher("principal/rel-user.jsp").forward(request, response);
 				
+			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("imprimirRelatorioPDF")) {
+				
+				String dataInicial = request.getParameter("dataIni");
+				String dataFinal = request.getParameter("dataF");
+				
+				List<ModelLogin> ml = null;
+				
+				if(dataInicial == null || dataInicial.isEmpty() && dataFinal == null || dataFinal.isEmpty())
+					
+					ml = dao.consultaAllRelatorio(super.getUserLogado(request));
+					
+				 else 
+					
+					ml = dao.consultaAllRelatorio(super.getUserLogado(request),dataInicial,dataFinal);
+	
+				HashMap<String, Object> params = new HashMap<String, Object>();
+				
+				params.put("PARAM_SUB_REPOR", request.getServletContext().getRealPath("relatorio") + File.separator);
+				 
+				//sem sub relatorio
+				//byte[] relatorio = new ReportUtil().geraRelatorioPDF(ml,"rel-user-jsp", request.getServletContext());
+				
+				//com sub relatorio
+				byte[] relatorio = new ReportUtil().geraRelatorioPDF(ml,"rel-user-jsp",params, request.getServletContext());
+				
+				response.setHeader("Content-Disposition", "attachment;filename=arquivo.pdf");
+				response.getOutputStream().write(relatorio);
+				
 			}
 			
 			else { 
@@ -179,6 +211,9 @@ public class ServletUserController extends ServletGenericUtil {
 			request.setAttribute("msg", e.getMessage());
 			redir.forward(request, response);
 		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

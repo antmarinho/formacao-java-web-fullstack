@@ -268,8 +268,7 @@
 										</div>
 
 										<nav aria-label="Page navigation example">
-											<ul class="pagination">
-											<%
+											<ul class="pagination"> <%
 												
 													int totalPagina = (int) request.getAttribute("totalPagina");
 												

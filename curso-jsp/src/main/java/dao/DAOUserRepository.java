@@ -279,6 +279,7 @@ public class DAOUserRepository {
 			ml.setPerfil(rs.getString("prefil"));
 			ml.setSexo(rs.getString("sexo"));
 			ml.setFones(this.listaFone(ml.getId()));
+			ml.setDtnsc(rs.getDate("dtnsc"));
 			
 			users.add(ml);
 		}
@@ -310,6 +311,7 @@ public class DAOUserRepository {
 			ml.setPerfil(rs.getString("prefil"));
 			ml.setSexo(rs.getString("sexo"));
 			ml.setFones(this.listaFone(ml.getId()));
+			ml.setDtnsc(rs.getDate("dtnsc"));
 			
 			users.add(ml);
 		}
