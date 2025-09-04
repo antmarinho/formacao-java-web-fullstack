@@ -57,6 +57,11 @@
     <artifactId>jasperreports</artifactId>
     <version>6.21.5</version>
 </dependency>
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi</artifactId>
+    <version>3.17</version>
+</dependency>
 
   </dependencies>
   <build>

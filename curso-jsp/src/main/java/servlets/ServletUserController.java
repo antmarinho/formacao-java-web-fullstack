@@ -163,7 +163,7 @@ public class ServletUserController extends ServletGenericUtil {
 				request.setAttribute("dataF", dataFinal);
 				request.getRequestDispatcher("principal/rel-user.jsp").forward(request, response);
 				
-			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("imprimirRelatorioPDF")) {
+			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("imprimirRelatorioPDF") || acao.equalsIgnoreCase("imprimirRelatorioExcel")) {
 				
 				String dataInicial = request.getParameter("dataIni");
 				String dataFinal = request.getParameter("dataF");
@@ -182,13 +182,31 @@ public class ServletUserController extends ServletGenericUtil {
 				
 				params.put("PARAM_SUB_REPOR", request.getServletContext().getRealPath("relatorio") + File.separator);
 				 
+				byte[] relatorio = null;
+				
+				String extensao = "";
+				
 				//sem sub relatorio
-				//byte[] relatorio = new ReportUtil().geraRelatorioPDF(ml,"rel-user-jsp", request.getServletContext());
+				//relatorio = new ReportUtil().geraRelatorioPDF(ml,"rel-user-jsp", request.getServletContext());
 				
 				//com sub relatorio
-				byte[] relatorio = new ReportUtil().geraRelatorioPDF(ml,"rel-user-jsp",params, request.getServletContext());
+				if(acao.equalsIgnoreCase("imprimirRelatorioPDF")) {
+					
+					relatorio = new ReportUtil().geraRelatorioPDF(ml,"rel-user-jsp",params, request.getServletContext());
+					
+					extensao = "pdf";
+					
+				} else
+					
+					if(acao.equalsIgnoreCase("imprimirRelatorioExcel")) {
+						
+						relatorio = new ReportUtil().geraRelatorioExcel(ml,"rel-user-jsp",params, request.getServletContext());
+						
+						extensao = "xls";
+						
+					}
 				
-				response.setHeader("Content-Disposition", "attachment;filename=arquivo.pdf");
+				response.setHeader("Content-Disposition", "attachment;filename=arquivo." + extensao);
 				response.getOutputStream().write(relatorio);
 				
 			}
