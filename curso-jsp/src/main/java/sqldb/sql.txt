@@ -60,7 +60,6 @@ ALTER TABLE "user" ADD COLUMN renda double precision;
 
 ALTER TABLE "user" ADD CONSTRAINT fk_user FOREIGN KEY (id_user) REFERENCES "user" (id);
 
-
 CREATE SEQUENCE telefone_seq
 INCREMENT 1
 MINVALUE 1

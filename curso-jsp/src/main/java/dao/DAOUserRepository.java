@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import connection.SingleConnection;
+import dto.DTOGraficoSalarioUser;
 import model.ModelLogin;
 import model.ModelTelefone;
 
@@ -576,7 +577,39 @@ public class DAOUserRepository {
 			qtdPagina ++;
 		
 		return qtdPagina.intValue();
-		
+
+	}
+
+	public DTOGraficoSalarioUser montarGraficoMediaSalario(Long user) throws SQLException {
+
+		String sql = "SELECT AVG(renda) AS media_salario, perfil FROM \"user\" WHERE id_user = ? GROUP BY perfil";
+
+		PreparedStatement stmt = connection.prepareStatement(sql);
+
+		stmt.setLong(1, user);
+
+		ResultSet rs = stmt.executeQuery();
+
+		List<String> perfils = new ArrayList<>();
+		List<Double> salarios = new ArrayList<>();
+
+		DTOGraficoSalarioUser dto = new DTOGraficoSalarioUser();
+
+		while(rs.next()) {
+
+			Double media = rs.getDouble("media_salario");
+			String perfil = rs.getString("perfil");
+
+			perfils.add(perfil);
+			salarios.add(media);
+
+		}
+
+		dto.setPerfils(perfils);
+		dto.setSalarios(salarios);
+
+		return dto;
+
 	}
 	
 }
