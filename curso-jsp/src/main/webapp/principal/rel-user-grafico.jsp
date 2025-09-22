@@ -74,24 +74,44 @@
 	<script type="text/javascript">
 
 	function gerarGrafico() {
-		
-         var myChart = new Chart(
 
-                document.getElementById('myChart'),{
+	    var urlAction = document.getElementById('form-user').action;
+	    var dataIni = document.getElementById('dataIni').value;
+	    var dataF = document.getElementById('dataF').value;
 
-                      type: 'line',
-                      data: {
-                                  labels: Utils.months({count: 7}),
-                                  datasets: [{
-                                    label: 'Grafico de media salarial',
-                                    data: [65, 59, 80, 81, 56, 55, 40],
-                                    fill: false,
-                                    borderColor: 'rgb(75, 192, 192)',
-                                    tension: 0.1
-                                  }]
-                            },
-                }
-         );
+	    $.ajax({
+
+        			method: "get",
+        			url: urlAction,
+        			data: "dataIni=" + dataIni + "&dataF=" + dataF + "&acao=grafico",
+        			success: function(response) {
+
+                        var json = JSON.parse(response);
+
+                        var myChart = new Chart(
+
+                            document.getElementById('myChart'),{
+
+                                type: 'line',
+                                data: {
+                                    labels: json.perfils,
+                                    datasets: [{
+                                        label: 'Grafico de media salarial',
+                                        data: json.salarios,
+                                        fill: false,
+                                        borderColor: 'rgb(75, 192, 192)',
+                                        tension: 0.1
+                                    }]
+                                },
+                            }
+                        );
+
+    				}
+
+        		}).fail(function(xhr,status,errorThrown){
+
+        			alert("Erro ao buscar dados para o grafico: " + xhr.responseText);
+        });
 		
 	}
 	

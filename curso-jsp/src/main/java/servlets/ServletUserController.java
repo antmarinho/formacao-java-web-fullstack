@@ -1,5 +1,6 @@
 package servlets;
 
+import dto.DTOGraficoSalarioUser;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -209,16 +210,37 @@ public class ServletUserController extends ServletGenericUtil {
 				response.setHeader("Content-Disposition", "attachment;filename=arquivo." + extensao);
 				response.getOutputStream().write(relatorio);
 				
-			}
-			
-			else { 
+			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("grafico")) {
+
+                String dataInicial = request.getParameter("dataIni");
+                String dataFinal = request.getParameter("dataF");
+
+                if(dataInicial == null || dataInicial.isEmpty() && dataFinal == null || dataFinal.isEmpty()) {
+
+                    DTOGraficoSalarioUser dto = dao.montarGraficoMediaSalario(super.getUserLogado(request));
+
+                    ObjectMapper mapper = new ObjectMapper();
+
+                    String json = mapper.writeValueAsString(dto);
+
+                    response.getWriter().write(json);
+
+                }
+
+                else{
+
+
+
+                }
+
+            } else {
 				
-					List<ModelLogin> users = dao.consultaAll(super.getUserLogado(request));
-					request.setAttribute("mLogins",users);
+                List<ModelLogin> users = dao.consultaAll(super.getUserLogado(request));
+                request.setAttribute("mLogins",users);
 					
-					request.setAttribute("totalPagina", dao.totalPagina(this.getUserLogado(request)));
+                request.setAttribute("totalPagina", dao.totalPagina(this.getUserLogado(request)));
 					
-					request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
+                request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
 			}
 			
 		} catch (SQLException e) {
