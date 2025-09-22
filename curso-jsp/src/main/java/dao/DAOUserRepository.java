@@ -611,5 +611,38 @@ public class DAOUserRepository {
 		return dto;
 
 	}
-	
+
+    public DTOGraficoSalarioUser montarGraficoMediaSalario(Long user, String dataI, String dataF) throws SQLException, ParseException {
+
+        String sql = "SELECT AVG(renda) AS media_salario, perfil FROM \"user\" WHERE id_user = ? AND dtnsc >= ? AND dtnsc <= ? GROUP BY perfil";
+
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        stmt.setLong(1, user);
+        stmt.setDate(2, Date.valueOf(new SimpleDateFormat("yyyy-mm-dd").format(new SimpleDateFormat("dd-mm-yyyy").parse(dataI))));
+        stmt.setDate(3, Date.valueOf(new SimpleDateFormat("yyyy-mm-dd").format(new SimpleDateFormat("dd-mm-yyyy").parse(dataF))));
+
+        ResultSet rs = stmt.executeQuery();
+
+        List<String> perfils = new ArrayList<>();
+        List<Double> salarios = new ArrayList<>();
+
+        DTOGraficoSalarioUser dto = new DTOGraficoSalarioUser();
+
+        while(rs.next()) {
+
+            Double media = rs.getDouble("media_salario");
+            String perfil = rs.getString("perfil");
+
+            perfils.add(perfil);
+            salarios.add(media);
+
+        }
+
+        dto.setPerfils(perfils);
+        dto.setSalarios(salarios);
+
+        return dto;
+
+    }
 }

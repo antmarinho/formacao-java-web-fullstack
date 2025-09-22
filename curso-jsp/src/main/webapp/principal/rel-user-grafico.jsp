@@ -73,6 +73,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script type="text/javascript">
 
+    var myChart = new Chart(document.getElementById('myChart'));
+
 	function gerarGrafico() {
 
 	    var urlAction = document.getElementById('form-user').action;
@@ -88,7 +90,9 @@
 
                         var json = JSON.parse(response);
 
-                        var myChart = new Chart(
+                        myChart.destroy();
+
+                        myChart = new Chart(
 
                             document.getElementById('myChart'),{
 
@@ -105,7 +109,6 @@
                                 },
                             }
                         );
-
     				}
 
         		}).fail(function(xhr,status,errorThrown){
