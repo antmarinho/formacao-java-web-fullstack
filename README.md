@@ -1,4 +1,4 @@
-#– Formação Java Web Fullstack
+# – Formação Java Web Fullstack
 
 O módulo **JSP (JavaServer Pages)** contém exemplos práticos para aprendizado de desenvolvimento web usando tecnologias JSP no backend Java.
 
