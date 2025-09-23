@@ -365,9 +365,13 @@
 	
 	var dtnsc = $("dtnsc").val();
 	
-	var dateFormat = new Date(dtnsc);
-	
-	$("#dtnsc").val(dateFormat.toLocaleDateString('pt-BR', {timeZone: 'UTC'}));
+	if(dtnsc != null && dtncs != '') {
+
+		var dateFormat = new Date(dtnsc);
+		
+		$("#dtnsc").val(dateFormat.toLocaleDateString('pt-BR', {timeZone: 'UTC'}));
+		
+	}
 	
 	$("#nome").focus();
 	

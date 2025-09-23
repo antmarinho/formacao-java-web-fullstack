@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set scope="session" var="isAdmin"
-	value='<%= request.getSession().getAttribute("isAdmin").toString() %>'></c:set>
+	value='<%= request.getSession().getAttribute("isAdmin") %>'></c:set>
 
 <nav class="pcoded-navbar">
 	<div class="sidebar_toggle">
