@@ -10,11 +10,17 @@
 	<h:form>
 		<h1>da pra misturar html com jsf</h1>
 		<table></table>
-		<h:inputText id="campoNome"></h:inputText>
+		Nome:
+		<h:inputText id="nome" value="#{pessoaBean.nome}"/>
 		<br/>
-		<h:outputLabel value="Teste JSF"></h:outputLabel>
+		<h:commandButton value="add nome" action="#{pessoaBean.addNome}"/>
 		<br/>
-		<h:commandButton value="botao"></h:commandButton>
+		<h:dataTable value="#{pessoaBean.nomes}" var="nome">
+			<h:column>
+				<h:outputText value="#{nome}"/>
+				<br/>
+			</h:column>
+		</h:dataTable>
 	</h:form>
 </h:body>
 </html>

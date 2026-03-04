@@ -1,13 +1,32 @@
 package br.com.acgm;
 
-import javax.faces.bean.ManagedBean;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+
+//@RequestScoped // toda vez q acontece a requisicao e da a resposta ele termina 
+//@ViewScoped // mantem os dados na tela apaga os dados mudar de tela ou redirecionar a tela
+//@SessionScoped // cria uma sessao pra cada pessoa e mantido os dados so para se fechar ou acabar o tempo 
+//@ApplicationScoped // compartilha os dados com todos usuarios
 @ManagedBean(name = "pessoaBean")
 public class PessoaBean {
 	
 	private String nome;
-	private String sobrenome;
+	private List<String> nomes = new ArrayList<String>();
 	
+	
+	public String addNome() {
+		
+		nomes.add(nome);
+		
+		return "";
+	}
+
 	
 	public String getNome() {
 		return nome;
@@ -17,12 +36,12 @@ public class PessoaBean {
 		this.nome = nome;
 	}
 	
-	public String getSobrenome() {
-		return sobrenome;
+	public List<String> getNomes() {
+		return nomes;
 	}
 	
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
+	public void setNomes(List<String> nomes) {
+		this.nomes = nomes;
 	}
-
+	
 }
