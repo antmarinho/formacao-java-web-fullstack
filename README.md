@@ -35,3 +35,6 @@ O que você vai encontrar neste módulo:
 - Exemplo de PrimeFaces: Integração com PrimeFaces para melhorar a interface com componentes visuais avançados.
 - Este projeto é uma excelente introdução ao desenvolvimento de aplicações web utilizando o framework JSF, com exemplos práticos e código bem estruturado.
 
+---
+
+# ORM com JPA e Hibernate
