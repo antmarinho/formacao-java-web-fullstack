@@ -1,4 +1,6 @@
-# Formação Java Web Fullstack
+ **Formação Java Web Fullstack**
+
+# JSP (JavaServer Pages)
 
 - O módulo **JSP (JavaServer Pages)** contém exemplos práticos para aprendizado de desenvolvimento web usando tecnologias JSP no backend Java.
 
@@ -15,7 +17,7 @@ O que você vai encontrar neste módulo:
 - **Visualização de gráficos interativos com Chart.js**.  
 - Exemplos de formulários, parâmetros de requisição e sessão, roteamento simples, etc.  
 
-#
+# JSF (JavaServer Faces)
 
 - O módulo **JSF (JavaServer Faces)** contém exemplos práticos para o aprendizado de desenvolvimento web utilizando a tecnologia JSF no backend Java, proporcionando uma base sólida para a construção de aplicações web com interface rica e interativa.
 
