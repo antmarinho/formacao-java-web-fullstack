@@ -4,5 +4,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
     version="2.3">
-
+    
+    <!--  versao para fazer sem notacoes nas classes @ManagedBean(name = "pessoaBean") @ViewScoped 
+    
+	    <managed-bean>
+	    	<managed-bean-name>pessoaBean</managed-bean-name>
+	    	<managed-bean-class>br.com.acgm.PessoaBean</managed-bean-class>
+	    	<managed-bean-scope>view</managed-bean-scope>
+	    </managed-bean>
+    
+ 	-->
 </faces-config>
