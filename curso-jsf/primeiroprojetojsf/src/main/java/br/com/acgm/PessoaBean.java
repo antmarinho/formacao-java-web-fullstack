@@ -31,7 +31,8 @@ public class PessoaBean {
 			
 			commandButton.setDisabled(true);
 			
-			return "paginanavegacao"; //nevegacao dinamica
+			//return "paginanavegacao"; //nevegacao dinamica
+			return "paginanavegacao?faces-redirect=true"; //redirecionamento de url
 		}
 		
 		return ""; // null ou vazio fica na msm pagina -> outcome
