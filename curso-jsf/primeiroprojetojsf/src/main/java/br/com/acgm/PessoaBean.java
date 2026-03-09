@@ -27,10 +27,14 @@ public class PessoaBean {
 		
 		nomes.add(nome);
 		
-		if(nomes.size() > 3)
+		if(nomes.size() > 3) {
+			
 			commandButton.setDisabled(true);
+			
+			return "paginanavegacao"; //nevegacao dinamica
+		}
 		
-		return "";
+		return ""; // null ou vazio fica na msm pagina -> outcome
 	}
 
 	
