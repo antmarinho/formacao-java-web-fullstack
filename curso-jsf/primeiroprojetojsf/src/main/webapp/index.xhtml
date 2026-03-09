@@ -15,7 +15,7 @@
 <h:body>
 	<h:form id="formPessoa">
 		<h1>ola jsf pagina index.jsf</h1>
-		<h:inputText id="nome"/>
+		<h:inputText id="nome" onclick="this.value='troquei o valor'" onchange="this.value= this.value.toUpperCase();"/>
 		<h:commandButton value="clicar" onclick="alterarValorCampo();"/>
 		<br/>
 		<br/>
