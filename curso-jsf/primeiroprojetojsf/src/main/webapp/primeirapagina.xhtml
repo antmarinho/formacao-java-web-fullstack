@@ -12,6 +12,8 @@
 		<table></table>
 		Nome:
 		<h:inputText id="nome" value="#{pessoaBean.nome}"/>
+		<h:inputSecret id="senha" value="#{pessoaBean.senha}"/>
+		<h:inputTextarea id="texto" value="#{pessoaBean.texto}" rows="5" cols="5"/>
 		<br/>
 		<h:commandButton binding="#{pessoaBean.commandButton}" value="add nome" action="#{pessoaBean.addNome}"/>
 		<br/>
