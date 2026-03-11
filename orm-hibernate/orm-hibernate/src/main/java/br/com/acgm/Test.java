@@ -49,5 +49,21 @@ public class Test {
 		System.out.println(pessoa);
 		
 	}
+	
+	@org.junit.Test
+	public void testUpdate() {
+		
+		DaoGeneric<UsuarioPessoa> dao = new DaoGeneric<>();
+		
+		UsuarioPessoa pessoa = dao.pesquisar(4L,UsuarioPessoa.class);
+		
+		pessoa.setIdade(50);
+		pessoa.setNome("aodj");
+		
+		dao.update(pessoa);
+		
+		System.out.println(pessoa);
+		
+	}
 
 }

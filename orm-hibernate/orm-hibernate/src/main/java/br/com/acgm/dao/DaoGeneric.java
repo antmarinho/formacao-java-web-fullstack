@@ -21,6 +21,20 @@ public class DaoGeneric<E> {
 		
 	}
 	
+	public E update(E entidade) {
+		
+		EntityTransaction transaction = entityManager.getTransaction();
+		
+		transaction.begin();
+		
+		E entidadeSalva = entityManager.merge(entidade);
+		
+		transaction.commit();
+		
+		return entidadeSalva;
+		
+	}
+	
 	public E pesquisar(E entidade) {
 		
 		Object id = HibernateUtil.getPrimaryKey(entidade);
@@ -36,5 +50,7 @@ public class DaoGeneric<E> {
 		
 		return e;
 	}
+	
+	
 	
 }
