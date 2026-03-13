@@ -65,5 +65,16 @@ public class Test {
 		System.out.println(pessoa);
 		
 	}
+	
+	@org.junit.Test
+	public void testeDeletar() {
+		
+		DaoGeneric<UsuarioPessoa> dao = new DaoGeneric<>();
+		
+		UsuarioPessoa pessoa = dao.pesquisar(1L,UsuarioPessoa.class);
+		
+		dao.deletarId(pessoa);
+		
+	}
 
 }
