@@ -1,5 +1,7 @@
 package br.com.acgm;
 
+import java.util.List;
+
 import br.com.acgm.dao.DaoGeneric;
 import br.com.acgm.model.UsuarioPessoa;
 
@@ -74,6 +76,22 @@ public class Test {
 		UsuarioPessoa pessoa = dao.pesquisar(1L,UsuarioPessoa.class);
 		
 		dao.deletarId(pessoa);
+		
+	}
+	
+	@org.junit.Test
+	public void testeConsultar() {
+		
+		DaoGeneric<UsuarioPessoa> dao = new DaoGeneric<>();
+		
+		List<UsuarioPessoa> list = dao.listar(UsuarioPessoa.class);
+		
+		for(UsuarioPessoa pessoa : list) {
+			
+			System.out.println(pessoa);
+			System.out.println("--------------------------------");
+			
+		}
 		
 	}
 
