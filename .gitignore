@@ -36,6 +36,36 @@ blog/bin/
 **/.idea
 **/.gradle
 
+# Apache Tomcat
+tomcat/
+apache-tomcat-*/
+/work/
+/temp/
+/logs/
+*.log
+
+# Catalina / Server configurations
+catalina.out
+catalina.pid
+catalina.sh
+conf/Catalina/
+conf/server.xml
+conf/web.xml
+
+# Se o tomcat estiver embutido no projeto
+/bin/catalina.*
+/bin/setenv.sh
+
+# Tomcat / Catalina
+/work/
+/temp/
+/logs/
+/conf/Catalina/
+*.pid
+
+# Smart Tomcat (IntelliJ)
+.smarttomcat/
+
 #Other Files
 *.ini
 
