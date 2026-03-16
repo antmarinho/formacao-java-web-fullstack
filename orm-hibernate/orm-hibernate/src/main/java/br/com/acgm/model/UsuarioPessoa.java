@@ -1,6 +1,7 @@
 package br.com.acgm.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -21,6 +22,9 @@ public class UsuarioPessoa {
 	private String login;
 	private String senha;
 	private int idade;
+
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER)
+    private List<TelefoneUser> fone;
 	
 	
 	public Long getId() {
@@ -79,11 +83,25 @@ public class UsuarioPessoa {
 		this.idade = idade;
 	}
 
-	@Override
-	public String toString() {
-		return "UsuarioPessoa [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", email=" + email
-				+ ", login=" + login + ", senha=" + senha + ", idade=" + idade + "]";
-	}
-	
+    public List<TelefoneUser> getFone() {
+        return fone;
+    }
 
+    public void setFone(List<TelefoneUser> fone) {
+        this.fone = fone;
+    }
+
+    @Override
+    public String toString() {
+        return "UsuarioPessoa{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", sobrenome='" + sobrenome + '\'' +
+                ", email='" + email + '\'' +
+                ", login='" + login + '\'' +
+                ", senha='" + senha + '\'' +
+                ", idade=" + idade +
+                ", fone=" + fone +
+                '}';
+    }
 }

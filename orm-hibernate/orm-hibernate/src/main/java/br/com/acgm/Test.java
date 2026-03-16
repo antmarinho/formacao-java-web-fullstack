@@ -3,6 +3,7 @@ package br.com.acgm;
 import java.util.List;
 
 import br.com.acgm.dao.DaoGeneric;
+import br.com.acgm.model.TelefoneUser;
 import br.com.acgm.model.UsuarioPessoa;
 import net.bytebuddy.build.BuildLogger;
 
@@ -172,6 +173,41 @@ public class Test {
 
         for(UsuarioPessoa pessoa : list)
             System.out.println(pessoa);
+
+    }
+
+    @org.junit.Test
+    public void testeSalvaFone() {
+
+        DaoGeneric dao = new DaoGeneric();
+
+        UsuarioPessoa pessoa = (UsuarioPessoa) dao.pesquisar(4L, UsuarioPessoa.class);
+
+        TelefoneUser fone = new TelefoneUser();
+
+        fone.setTipo("Casa");
+        fone.setNumero("81455578");
+        fone.setPessoa(pessoa);
+
+        dao.salvar(fone);
+
+    }
+
+    @org.junit.Test
+    public void testeConsultaFone() {
+
+        DaoGeneric dao = new DaoGeneric();
+
+        UsuarioPessoa pessoa = (UsuarioPessoa) dao.pesquisar(4L, UsuarioPessoa.class);
+
+        for(TelefoneUser fone : pessoa.getFone()) {
+
+            System.out.println(fone.getNumero());
+            System.out.println(fone.getTipo());
+            System.out.println(fone.getPessoa().getNome());
+            System.out.println("----------------------------------------------");
+
+        }
 
     }
 
