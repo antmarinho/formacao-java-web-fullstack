@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.acgm.dao.DaoGeneric;
 import br.com.acgm.model.UsuarioPessoa;
+import net.bytebuddy.build.BuildLogger;
 
 public class Test {
 	
@@ -57,7 +58,7 @@ public class Test {
 		
 		DaoGeneric<UsuarioPessoa> dao = new DaoGeneric<>();
 		
-		UsuarioPessoa pessoa = dao.pesquisar(4L,UsuarioPessoa.class);
+		UsuarioPessoa pessoa = dao.pesquisar(3L,UsuarioPessoa.class);
 		
 		pessoa.setIdade(50);
 		pessoa.setNome("aodj");
@@ -94,5 +95,18 @@ public class Test {
 		}
 		
 	}
+
+    @org.junit.Test
+    public void testQueryList(){
+
+        DaoGeneric<UsuarioPessoa> dao = new DaoGeneric<>();
+
+        List<UsuarioPessoa> list = dao.getEntityManager().createQuery(" from UsuarioPessoa where nome = 'acgm66'").getResultList();
+
+        for(UsuarioPessoa pessoa : list)
+            System.out.println(pessoa);
+
+    }
+
 
 }
