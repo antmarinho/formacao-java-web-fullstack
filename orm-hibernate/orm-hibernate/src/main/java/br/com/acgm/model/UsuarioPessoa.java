@@ -1,11 +1,14 @@
 package br.com.acgm.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+
+        @NamedQuery(name = "UsuarioPessoa.findAll", query = "select u from UsuarioPessoa u"),
+        @NamedQuery(name = "UsuarioPessoa.findByName", query = "select u from UsuarioPessoa u where u.nome = :nome")
+
+})
 public class UsuarioPessoa {
 	
 	@Id

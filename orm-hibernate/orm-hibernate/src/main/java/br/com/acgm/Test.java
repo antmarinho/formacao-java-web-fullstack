@@ -148,4 +148,31 @@ public class Test {
 
     }
 
+    @org.junit.Test
+    public void TesteNamedQuery() {
+
+        DaoGeneric<UsuarioPessoa> dao = new DaoGeneric<>();
+
+        List<UsuarioPessoa> list = dao.getEntityManager().createNamedQuery("UsuarioPessoa.findAll").getResultList();
+
+        for(UsuarioPessoa pessoa : list)
+            System.out.println(pessoa);
+
+    }
+
+    @org.junit.Test
+    public void TesteNamedQueryParam() {
+
+        DaoGeneric<UsuarioPessoa> dao = new DaoGeneric<>();
+
+        List<UsuarioPessoa> list = dao.getEntityManager()
+                                      .createNamedQuery("UsuarioPessoa.findByName")
+                                      .setParameter("nome","jose")
+                                      .getResultList();
+
+        for(UsuarioPessoa pessoa : list)
+            System.out.println(pessoa);
+
+    }
+
 }
