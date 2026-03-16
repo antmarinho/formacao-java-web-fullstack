@@ -43,12 +43,3 @@ Cada módulo é um projeto Maven independente. Para explorar um módulo específ
 ## Contribuição
 
 Contribuições são bem-vindas! Se você encontrar erros, tiver sugestões de melhoria ou quiser adicionar novos exemplos, sinta-se à vontade para abrir uma issue ou enviar um pull request.
-
-## Licença
-
-Este projeto está licenciado sob a licença MIT. Consulte o arquivo `LICENSE` (se disponível) para mais detalhes.
-
----
-
-**Autor:** Manus AI
-**Data:** 16 de Março de 2026
