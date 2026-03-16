@@ -137,4 +137,15 @@ public class Test {
 
     }
 
+    @org.junit.Test
+    public void testeQuerySomaIdade() {
+
+        DaoGeneric<UsuarioPessoa> dao = new DaoGeneric<>();
+
+        Long somaIdade = (Long) dao.getEntityManager().createQuery("select sum(u.idade) from UsuarioPessoa u").getSingleResult();
+
+        System.out.println(somaIdade);
+
+    }
+
 }
