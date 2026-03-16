@@ -18,7 +18,7 @@ public class Test {
 		pessoa.setEmail("acgm@acgm.com");
 		pessoa.setIdade(12);
 		pessoa.setLogin("acgm");
-		pessoa.setNome("acgm66");
+		pessoa.setNome("jose");
 		pessoa.setSobrenome("acgm");
 		pessoa.setSenha("123344");
 		
@@ -122,5 +122,19 @@ public class Test {
 
     }
 
+    @org.junit.Test
+    public void testQueryListParameter() {
+
+        DaoGeneric<UsuarioPessoa> dao = new DaoGeneric<>();
+
+        List<UsuarioPessoa> list = dao.getEntityManager().createQuery("from UsuarioPessoa where nome = :nome and sobrenome = :sobrenome")
+                                                         .setParameter("nome","jose")
+                                                         .setParameter("sobrenome", "acgm")
+                                                         .getResultList();
+
+        for(UsuarioPessoa pessoa : list)
+            System.out.println(pessoa);
+
+    }
 
 }
