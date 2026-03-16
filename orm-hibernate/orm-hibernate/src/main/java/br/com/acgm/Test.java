@@ -108,5 +108,19 @@ public class Test {
 
     }
 
+    @org.junit.Test
+    public void testQueryListMaxResult(){
+
+        DaoGeneric<UsuarioPessoa> dao = new DaoGeneric<>();
+
+        List<UsuarioPessoa> list = dao.getEntityManager().createQuery(" from UsuarioPessoa order by id")
+                                                         .setMaxResults(4)
+                                                         .getResultList();
+
+        for(UsuarioPessoa pessoa : list)
+            System.out.println(pessoa);
+
+    }
+
 
 }
