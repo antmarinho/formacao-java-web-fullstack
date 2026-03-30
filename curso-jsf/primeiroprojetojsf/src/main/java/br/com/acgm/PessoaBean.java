@@ -1,5 +1,8 @@
 package br.com.acgm;
 
+import br.com.acgm.dao.DaoGeneric;
+import br.com.acgm.entity.Pessoa;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +19,34 @@ import javax.faces.component.html.HtmlCommandButton;
 //@ApplicationScoped // compartilha os dados com todos usuarios
 @ManagedBean(name = "pessoaBean")
 public class PessoaBean {
-	
-	private String nome;
+
+    private Pessoa pessoa = new Pessoa();
+
+	private DaoGeneric<Pessoa> dao = new DaoGeneric<>();
+
+    public String salvar() {
+        dao.salvar(pessoa);
+
+        return "";
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public DaoGeneric<Pessoa> getDao() {
+        return dao;
+    }
+
+    public void setDao(DaoGeneric<Pessoa> dao) {
+        this.dao = dao;
+    }
+
+    /*private String nome;
 	private List<String> nomes = new ArrayList<String>();
 	
 	private String senha;
@@ -80,5 +109,5 @@ public class PessoaBean {
 	
 	public void setTexto(String texto) {
 		this.texto = texto;
-	}
+	} */
 }

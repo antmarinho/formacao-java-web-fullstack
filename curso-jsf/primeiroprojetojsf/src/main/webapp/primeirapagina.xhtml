@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-	<title>Ola jsf</title>
+    <title>Ola jsf</title>
 </h:head>
 <h:body>
-	<h:form id="formPessoa">
-		<h1>da pra misturar html com jsf</h1>
-		<table></table>
-		Nome:
-		<h:inputText id="nome" value="#{pessoaBean.nome}"/>
-		<h:inputSecret id="senha" value="#{pessoaBean.senha}"/>
-		<h:inputTextarea id="texto" value="#{pessoaBean.texto}" rows="5" cols="5"/>
-		<br/>
-		<h:commandButton binding="#{pessoaBean.commandButton}" value="add nome" action="#{pessoaBean.addNome}"/>
-		<br/>
-		<h:dataTable value="#{pessoaBean.nomes}" var="nome">
-			<h:column>
-				<h:outputText value="#{nome}"/>
-				<br/>
-			</h:column>
-		</h:dataTable>
-	</h:form>
+    <h:form id="formPessoa">
+        <h1>Ola JSF</h1>
+
+        <h:outputLabel value="Nome"/>
+        <h:inputText value="#{pessoaBean.pessoa.nome}"/>
+        <br/>
+        <h:outputLabel value="Sobrenome"/>
+        <h:inputText value="#{pessoaBean.pessoa.sobrenome}"/>
+        <br/>
+        <h:outputLabel value="Idade"/>
+        <h:inputText value="#{pessoaBean.pessoa.idade}"/>
+        <br/>
+        <!--<h:outputLabel value="Data Nascimento"/>
+        <h:inputText value="#{pessoaBean.pessoa.dtnsc}"/>-->
+        <br/>
+        <h:commandButton value="Salvar" action="#{pessoaBean.salvar}"/>
+    </h:form>
 </h:body>
 </html>
