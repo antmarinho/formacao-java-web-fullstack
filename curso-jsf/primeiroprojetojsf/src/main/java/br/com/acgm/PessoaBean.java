@@ -2,16 +2,8 @@ package br.com.acgm;
 
 import br.com.acgm.dao.DaoGeneric;
 import br.com.acgm.entity.Pessoa;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.faces.component.html.HtmlCommandButton;
 
 //@RequestScoped // toda vez q acontece a requisicao e da a resposta ele termina 
 @ViewScoped // mantem os dados na tela apaga os dados mudar de tela ou redirecionar a tela
@@ -25,8 +17,16 @@ public class PessoaBean {
 	private DaoGeneric<Pessoa> dao = new DaoGeneric<>();
 
     public String salvar() {
-        dao.salvar(pessoa);
+
+        pessoa = dao.merge(pessoa);
+
+        return "";
+    }
+
+    public String novo() {
+
         pessoa = new Pessoa();
+
         return "";
     }
 
