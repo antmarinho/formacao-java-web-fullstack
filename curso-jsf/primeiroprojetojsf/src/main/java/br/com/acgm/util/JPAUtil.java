@@ -16,7 +16,14 @@ public class JPAUtil {
     }
 
     public static EntityManager getEntityManager() {
+
         return factory.createEntityManager();
+    }
+
+    public static Object getId(Object entidade) {
+
+        return factory.getPersistenceUnitUtil().getIdentifier(entidade);
+
     }
 
 }

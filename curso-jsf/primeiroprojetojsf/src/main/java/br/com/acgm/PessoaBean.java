@@ -30,6 +30,15 @@ public class PessoaBean {
         return "";
     }
 
+    public String deletar() {
+
+        dao.deletarId(pessoa);
+
+        pessoa = new Pessoa();
+
+        return "";
+    }
+
     public Pessoa getPessoa() {
         return pessoa;
     }
