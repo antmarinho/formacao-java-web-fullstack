@@ -4,6 +4,8 @@ import br.com.acgm.util.JPAUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.awt.*;
+import java.util.List;
 
 public class DaoGeneric<T> {
 
@@ -41,22 +43,6 @@ public class DaoGeneric<T> {
 
     }
 
-    /*public void deletar(T entidade) {
-
-        EntityManager entityManager = JPAUtil.getEntityManager();
-
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-
-        entityTransaction.begin();
-
-        entityManager.remove(entidade);
-
-        entityTransaction.commit();
-
-        entityManager.close();
-
-    }*/
-
     public void deletarId(T entidade) {
 
         EntityManager entityManager = JPAUtil.getEntityManager();
@@ -75,4 +61,20 @@ public class DaoGeneric<T> {
 
     }
 
+    public List<T> getListaEntidade(Class<T> entidade) {
+
+        EntityManager entityManager = JPAUtil.getEntityManager();
+
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+
+        entityTransaction.begin();
+
+        List<T> entidades = entityManager.createQuery("FROM " + entidade.getName()).getResultList();
+
+        entityTransaction.commit();
+
+        entityManager.close();
+
+        return entidades;
+    }
 }

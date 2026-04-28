@@ -2,8 +2,12 @@ package br.com.acgm;
 
 import br.com.acgm.dao.DaoGeneric;
 import br.com.acgm.entity.Pessoa;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.util.ArrayList;
+import java.util.List;
 
 //@RequestScoped // toda vez q acontece a requisicao e da a resposta ele termina 
 @ViewScoped // mantem os dados na tela apaga os dados mudar de tela ou redirecionar a tela
@@ -13,12 +17,15 @@ import javax.faces.bean.ViewScoped;
 public class PessoaBean {
 
     private Pessoa pessoa = new Pessoa();
+    private List<Pessoa> pessoas = new ArrayList<>();
 
 	private DaoGeneric<Pessoa> dao = new DaoGeneric<>();
 
     public String salvar() {
 
         pessoa = dao.merge(pessoa);
+
+        carregarPessoas();
 
         return "";
     }
@@ -36,7 +43,16 @@ public class PessoaBean {
 
         pessoa = new Pessoa();
 
+        carregarPessoas();
+
         return "";
+    }
+
+    @PostConstruct
+    public void carregarPessoas() {
+
+        pessoas = dao.getListaEntidade(Pessoa.class);
+
     }
 
     public Pessoa getPessoa() {
@@ -53,6 +69,14 @@ public class PessoaBean {
 
     public void setDao(DaoGeneric<Pessoa> dao) {
         this.dao = dao;
+    }
+
+    public List<Pessoa> getPessoas() {
+        return pessoas;
+    }
+
+    public void setPessoas(List<Pessoa> pessoas) {
+        this.pessoas = pessoas;
     }
 
     /*private String nome;
