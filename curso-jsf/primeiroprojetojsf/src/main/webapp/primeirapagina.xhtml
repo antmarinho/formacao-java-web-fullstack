@@ -43,6 +43,11 @@
             <h:column>
                 <h:outputText value="#{pessoa.idade}"/>
             </h:column>
+            <h:column>
+                <h:commandLink value="Editar">
+                    <f:setPropertyActionListener target="#{pessoaBean.pessoa}" value="#{pessoa}"/>
+                </h:commandLink>
+            </h:column>
         </h:dataTable>
 
     </h:form>
