@@ -48,6 +48,11 @@
                     <f:setPropertyActionListener target="#{pessoaBean.pessoa}" value="#{pessoa}"/>
                 </h:commandLink>
             </h:column>
+            <h:column>
+                <h:commandLink value="Excluir" action="#{pessoaBean.deletar}">
+                    <f:setPropertyActionListener target="#{pessoaBean.pessoa}" value="#{pessoa}"/>
+                </h:commandLink>
+            </h:column>
         </h:dataTable>
 
     </h:form>
