@@ -25,7 +25,7 @@
             <!--<h:outputLabel value="Data Nascimento"/>
             <h:inputText value="#{pessoaBean.pessoa.dtnsc}"/>-->
 
-            
+
             <h:panelGroup>
                 <h:commandButton value="Salvar" action="#{pessoaBean.salvar}"/>
                 <h:commandButton value="Novo" action="#{pessoaBean.novo}"/>
@@ -33,25 +33,32 @@
             </h:panelGroup>
         </h:panelGrid>
 
-        <h:dataTable value="#{pessoaBean.pessoas}" var="pessoa">
+        <h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" border="2" cellpadding="6">
+
+            <f:facet name="header">
+                Lista de pessoas cadastradas
+            </f:facet>
+
             <h:column>
+                <f:facet name="header">ID</f:facet>
                 <h:outputText value="#{pessoa.id}"/>
             </h:column>
             <h:column>
+                <f:facet name="header">Nome</f:facet>
                 <h:outputText value="#{pessoa.nome}"/>
             </h:column>
             <h:column>
+                <f:facet name="header">Sobrenome</f:facet>
                 <h:outputText value="#{pessoa.sobrenome}"/>
             </h:column>
             <h:column>
-                <h:outputText value="#{pessoa.idade}"/>
-            </h:column>
-            <h:column>
+                <f:facet name="header">Editar</f:facet>
                 <h:commandLink value="Editar">
                     <f:setPropertyActionListener target="#{pessoaBean.pessoa}" value="#{pessoa}"/>
                 </h:commandLink>
             </h:column>
             <h:column>
+                <f:facet name="header">Excluir</f:facet>
                 <h:commandLink value="Excluir" action="#{pessoaBean.deletar}">
                     <f:setPropertyActionListener target="#{pessoaBean.pessoa}" value="#{pessoa}"/>
                 </h:commandLink>
