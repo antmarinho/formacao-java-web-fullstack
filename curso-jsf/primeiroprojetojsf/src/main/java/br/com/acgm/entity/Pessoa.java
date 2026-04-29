@@ -14,6 +14,7 @@ public class Pessoa  implements Serializable {
     private String nome;
     private String sobrenome;
     private Integer idade;
+    private String sexo;
 
     @Temporal(TemporalType.DATE)
     private Date dtnsc;
@@ -58,6 +59,14 @@ public class Pessoa  implements Serializable {
 
     public void setDtnsc(Date dtnsc) {
         this.dtnsc = dtnsc;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     @Override

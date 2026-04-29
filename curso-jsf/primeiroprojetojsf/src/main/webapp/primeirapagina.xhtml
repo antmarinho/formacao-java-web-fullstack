@@ -23,10 +23,14 @@
             <h:inputText value="#{pessoaBean.pessoa.sobrenome}"/>
             <h:outputLabel value="Idade"/>
             <h:inputText value="#{pessoaBean.pessoa.idade}"/>
-            <!--<h:outputLabel value="Data Nascimento"/>
-            <h:inputText value="#{pessoaBean.pessoa.dtnsc}"/>-->
+            <h:outputLabel value="Sexo"/>
+            <h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}" required="true">
+                <f:selectItem itemValue="" itemLabel="Selecione" noSelectionOption="true"/>
+                <f:selectItem itemValue="H" itemLabel="Masculino"/>
+                <f:selectItem itemValue="M" itemLabel="Feminino"/>
+            </h:selectOneMenu>
 
-
+            <h:outputLabel/>
             <h:panelGroup>
                 <h:commandButton value="Salvar" action="#{pessoaBean.salvar}"/>
                 <h:commandButton value="Novo" action="#{pessoaBean.novo}"/>
