@@ -31,13 +31,16 @@
             </h:selectOneMenu>
 
             <h:outputLabel value="Frameworks"/>
-            <h:selectManyMenu id="campoframeworks" value="#{pessoaBean.pessoa.frameworks}" required="true">
+            <h:selectManyMenu id="campoframeworks" value="#{pessoaBean.pessoa.frameworks}">
                 <f:selectItem itemValue="Hibernate"/>
                 <f:selectItem itemValue="Spring Mvc"/>
                 <f:selectItem itemValue="JPA"/>
                 <f:selectItem itemValue="JSF"/>
                 <f:selectItem itemValue="ReactJs"/>
             </h:selectManyMenu>
+
+            <h:outputLabel value="Ativo"/>
+            <h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
 
             <h:outputLabel/>
             <h:panelGroup>

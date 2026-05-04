@@ -16,6 +16,7 @@ public class Pessoa  implements Serializable {
     private Integer idade;
     private String sexo;
     private String[] frameworks;
+    private boolean ativo;
 
     @Temporal(TemporalType.DATE)
     private Date dtnsc;
@@ -76,6 +77,14 @@ public class Pessoa  implements Serializable {
 
     public void setFrameworks(String[] frameworks) {
         this.frameworks = frameworks;
+    }
+
+    public boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     @Override
